@@ -7,7 +7,7 @@ define('yaga', ['jquery', 'jqueryMobile', 'leaflet'], function ($, jqm, L) {
     document = window.document;
     // Settings
     //$('[data-role="footer"]').toolbar({ tapToggle: false});
-    map = L.map('yaga-map');
+    map = L.map('yaga-map', {zoomControl: false});
     $(document).ready(function () {
 
         new Toolbar('header', '#yaga-header');
