@@ -7,3 +7,9 @@
     height: 100%;
     width: 100%;
 }
+.leaflet-top {
+    top: 50px;
+}
+.leaflet-bottom {
+    bottom: 50px;
+}
