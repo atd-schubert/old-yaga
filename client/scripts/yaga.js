@@ -5,6 +5,8 @@ define('yaga', ['openlayers', 'jquery', 'jqueryMobile'], function (ol) {
 
     var yaga, map;
 
+    console.log(window.g = ol);
+
     map = new ol.Map({
         target: 'yaga- map',
         layers: [
