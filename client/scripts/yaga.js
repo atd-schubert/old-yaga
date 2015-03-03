@@ -1,15 +1,20 @@
 /*global define*/
 
-define('yaga', ['openlayers', 'jquery', 'jqueryMobile'], function (ol) {
+define('yaga', ['jquery', 'jqueryMobile', 'openlayers'], function ($, jqm, ol) {
     'use strict';
 
     var yaga, map;
+
+    // Settings
+    //$('[data-role="footer"]').toolbar({ tapToggle: false});
+    $('[data-role="header"], [data-role="footer"]').toolbar({ tapToggle: false});
 
     map = new ol.Map({
         target: 'yaga-map',
         layers: [
             new ol.layer.Tile({
-                source: new ol.source.MapQuest({layer: 'sat'})
+                //source: new ol.source.MapQuest({layer: 'sat'})
+                source: new ol.source.OSM()
             })
         ],
         view: new ol.View({
@@ -17,6 +22,21 @@ define('yaga', ['openlayers', 'jquery', 'jqueryMobile'], function (ol) {
             zoom: 4
         })
     });
+
+    map.on('drag', function(){
+        console.log('drag');
+    });
+    map.on('dragend', function(){
+        console.log('dragend');
+    });
+    map.on('click', function(){
+        console.log('click');
+    });
+    map.on('change:size', function(){
+        console.log('cs');
+    });
+
+
 
     yaga = {
         // Instances:
