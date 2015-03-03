@@ -28,3 +28,6 @@ node_modules
 .lock-wscript
 
 # bower modules in client enviroment
+client/scripts/vendor
+
+.idea/*
