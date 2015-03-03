@@ -5,7 +5,8 @@ require.config({
         EventEmitter: 'vendor/eventEmitter/EventEmitter.min',
         jquery: 'vendor/jquery/jquery.min',
         jqueryMobile: 'vendor/jquery-mobile-bower/js/jquery.mobile-1.4.5.min',
-        underscore: 'vendor/underscore-amd/underscore'
+        underscore: 'vendor/underscore-amd/underscore',
+        leaflet: 'vendor/leaflet/dist/leaflet'
     },
     baseUrl: 'scripts/'
 });
