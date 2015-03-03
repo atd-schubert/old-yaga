@@ -6,7 +6,7 @@
     "underscore-amd": null,
     "eventEmitter": null,
     "requirejs": null,
-    "openlayers": null,
+    "leaflet": null,
     "jquery-mobile-bower": null
   }
 }
