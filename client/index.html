@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>YAGA - Yet another geo application</title>
+    <link rel="stylesheet" href="scripts/vendor/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css"/>
+    <link rel="stylesheet" href="scripts/vendor/openlayers/theme/default/style.mobile.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    <!-- <script src="scripts/vendor/openlayers/lib/OpenLayers.js"></script>-->
+    <!--<script src="http://openlayers.org/en/v3.2.1/build/ol.js"></script>-->
+    <script data-main="scripts/main" src="scripts/vendor/requirejs/require.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+<div data-role="page" id="index">
+    <div data-role="header" data-position="fixed" data-fullscreen="true">
+        <h1>YAGA - Yet another geo application</h1>
+        <a href="#" style="float: right">opts</a>
+    </div>
+    <div data-role="content">
+        <div id="yaga-map"></div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-fullscreen="true">
+        <!-- global operations -->
+        <a href="#">locate</a>
+
+        <!-- other side: specific operations -->
+        <a href="#tools-panel" style="float: right;">login</a>
+        <a href="#layer-tree-panel" style="float: right;">layers</a>
+        <a href="#settings-panel" style="float: right;">settings</a>
+
+    </div>
+    <div data-role="panel" class="yaga-panel" data-position="right" id="tools-panel" data-display="overlay" data-position-fixed="true">
+        <!-- left -->
+        <a href="#index" data-rel="close" class="ui-btn">Close</a>
+        <br/>
+        <ul data-role="listview">
+            <li data-role="list-divider">Tile-Layers (open)</li>
+            <li><a href="#">OpenStreetMap Deutschland</a></li>
+            <li><a href="#">OpenStreetMap</a></li>
+            <li><a href="#">Fahrrad-Karte</a></li>
+            <li><a href="#">ÖPNV-Karte</a></li>
+            <li><a href="#">Skobbler</a></li>
+            <li><a href="#">Hike and Bike</a></li>
+        </ul>
+    </div>
+    <div data-role="panel" class="yaga-panel" id="settings-panel" data-display="overlay" data-position-fixed="true">
+        <!-- right -->
+        <a href="#index" data-rel="close">Close</a>
+    </div>
+</div>
+</body>
+</html>
