@@ -5,10 +5,8 @@ define('yaga', ['openlayers', 'jquery', 'jqueryMobile'], function (ol) {
 
     var yaga, map;
 
-    console.log(window.g = ol);
-
     map = new ol.Map({
-        target: 'yaga- map',
+        target: 'yaga-map',
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.MapQuest({layer: 'sat'})
