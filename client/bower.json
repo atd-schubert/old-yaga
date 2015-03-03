@@ -1,0 +1,12 @@
+{
+  "name": "yaga-client",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": null,
+    "underscore-amd": null,
+    "eventEmitter": null,
+    "requirejs": null,
+    "openlayers": null,
+    "jquery-mobile-bower": null
+  }
+}
