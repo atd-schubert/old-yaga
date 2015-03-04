@@ -81,20 +81,3 @@ define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
     }
     return Panel;
 });
-
-
-Panel = function (name, elem) {
-    Panel.panels[name] = this;
-    var $elem = $(elem);
-    this.open = function () {
-        $elem.panel('open');
-    };
-    this.close = function () {
-        $elem.panel('close');
-    };
-    this.toggle = function () {
-        $elem.panel('toggle');
-    };
-
-};
-Panel.panels = {};
