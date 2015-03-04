@@ -53,13 +53,13 @@ define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
         };
 
         this.open = function () {
-            this.emit('show');
+            this.emit('open');
             var $panel;
             $panel = $(this.domRoot);
             $panel.trigger('create');
             $panel.panel('open');
         };
-        this.close = function (id) {
+        this.close = function () {
             this.emit('close');
             var $panel;
             $panel = $(this.domRoot);
@@ -71,12 +71,10 @@ define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
         this.setPositionFixed(opts.positionFixed);
         this.setContent(opts.content);
         this.setId(opts.id);
-
-        // Append to man page?: require(['yaga'], function (yaga) {});
     };
     Panel.prototype = new EventEmitter();
     Panel.panels = {};
-    Panel.create = function (opts){
+    Panel.create = function (opts) {
         return new Panel(opts);
     }
     return Panel;
