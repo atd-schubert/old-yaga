@@ -67,11 +67,21 @@ define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
             $panel.panel('close');
         };
 
-        this.setPosition(opts.position);
-        this.setDisplay(opts.display);
-        this.setPositionFixed(opts.positionFixed);
-        this.setContent(opts.content);
-        this.setId(opts.id);
+        if (opts.position) {
+            this.setPosition(opts.position);
+        }
+        if (opts.display) {
+            this.setDisplay(opts.display);
+        }
+        if (opts.positionFixed) {
+            this.setPositionFixed(opts.positionFixed);
+        }
+        if (opts.content) {
+            this.setContent(opts.content);
+        }
+        if (opts.id) {
+            this.setId(opts.id);
+        }
     };
     Panel.prototype = new EventEmitter();
     Panel.panels = {};
