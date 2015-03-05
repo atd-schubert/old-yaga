@@ -3,6 +3,7 @@ define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
     'use strict';
     var Panel;
     Panel = function (opts) {
+        // TODO: adding persistent attribute to not autoclose panel on outside click
         opts = opts || {};
         opts.position = opts.position || 'right';
         opts.display = opts.display || 'overlay';
@@ -76,6 +77,6 @@ define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
     Panel.panels = {};
     Panel.create = function (opts) {
         return new Panel(opts);
-    }
+    };
     return Panel;
 });
