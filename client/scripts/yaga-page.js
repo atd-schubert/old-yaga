@@ -1,5 +1,5 @@
 /*globals define, window*/
-define('yaga-page', ['yaga-toolbar', 'yaga-content', 'yaga-map', 'jquery', 'EventEmitter', 'jqueryMobile'], function (Toolbar, Content, Map, $, EventEmitter) {
+define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'jquery', 'EventEmitter', 'jqueryMobile'], function (yaga, Toolbar, Content, Map, $, EventEmitter) {
     'use strict';
     var Page;
     Page = function YagaPage(opts) {
@@ -105,5 +105,7 @@ define('yaga-page', ['yaga-toolbar', 'yaga-content', 'yaga-map', 'jquery', 'Even
     Page.create = function (opts){
         return new Page(opts);
     };
+
+    yaga.Page = Page;
     return Page;
 });

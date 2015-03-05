@@ -1,5 +1,5 @@
 /*globals define, window*/
-define('yaga-panel', ['jquery', 'EventEmitter'], function ($, EventEmitter) {
+define('yaga-panel', ['yaga-core', 'jquery', 'EventEmitter'], function (yaga, $, EventEmitter) {
     'use strict';
     var Panel;
     Panel = function (opts) {

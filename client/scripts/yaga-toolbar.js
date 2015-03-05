@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-toolbar', ['jquery', 'EventEmitter', 'jqueryMobile'], function ($, EventEmitter) {
+define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], function (yaga, $, EventEmitter) {
     'use strict';
     var Toolbar;
 
@@ -109,5 +109,6 @@ define('yaga-toolbar', ['jquery', 'EventEmitter', 'jqueryMobile'], function ($, 
         return new Toolbar(opts);
     };
 
+    yaga.Toolbar = Toolbar;
     return Toolbar;
 });

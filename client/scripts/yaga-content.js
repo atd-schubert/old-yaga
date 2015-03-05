@@ -1,5 +1,5 @@
 /*globals define, window*/
-define('yaga-content', ['jquery'], function ($) {
+define('yaga-content', ['yaga-core', 'jquery'], function (yaga, $) {
     'use strict';
     var Content;
 
@@ -58,5 +58,6 @@ define('yaga-content', ['jquery'], function ($) {
         return new Content(opts);
     };
 
+    yaga.Content = Content;
     return Content;
 });

@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-map', ['leaflet', 'jquery', 'EventEmitter', 'jqueryMobile'], function YagaMap(L, $, EventEmitter) {
+define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMobile'], function YagaMap(yaga, L, $, EventEmitter) {
     var Map, document;
 
     document = window.document;
@@ -61,5 +61,6 @@ define('yaga-map', ['leaflet', 'jquery', 'EventEmitter', 'jqueryMobile'], functi
     };
     Map.maps = {};
 
+    yaga.Map = Map;
     return Map;
 });
