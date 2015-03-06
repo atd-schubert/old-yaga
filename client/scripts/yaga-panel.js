@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'jquery', 'leaflet', 'jqueryMobile'], function YagaPanel(yaga, EventEmitter, Content, $, L) {
+define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-command', 'jquery', 'leaflet', 'jqueryMobile'], function YagaPanel(yaga, EventEmitter, Content, HashCommand, $, L) {
     'use strict';
     var Panel, document;
 
@@ -18,13 +18,16 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'jquery', 'le
 
         if (typeof opts.name === "string") {
             Panel.panel[opts.name] = this;
-            console.log('register');
-            window.addEventListener('hashchange', function () {
-                console.log("call");
-                if (window.location.hash === '#:panel.' + opts.name) {
+            HashCommand.create({
+                command: function () {
                     self.open();
+                },
+                regExp: {
+                    test: function (path) {
+                        return path === ('#:panel.' + opts.name);
+                    }
                 }
-            }, false);
+            });
         }
 
         this.domRoot = document.createElement('div');
