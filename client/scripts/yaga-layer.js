@@ -5,8 +5,14 @@ define('yaga-layer', ['yaga-core', 'yaga-tile-layer'], function YagaLayer(yaga) 
     var Layer;
     Layer = {
         yagaExtensionName: 'Layer',
+        layer: {},
         create: function (opts) {
             opts = opts || {};
+
+            if (typeof opts.name === "string") {
+                Layer.layer[opts.name] = this;
+            }
+
             opts.layerType = opts.layerType || 'TileLayer';
             return yaga[opts.layerType].create(opts);
         }
