@@ -46,6 +46,17 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
 
         this.setStyle(opts.style);
 
+        this.activate = function () {
+            if (Map.activeMap) {
+                Map.activeMap.deactivate();
+            }
+            this.emit('activate');
+            Map.activeMap = this;
+        };
+        this.deactivate = function () {
+            this.emit('deactivate');
+            Map.activeMap = null;
+        };
 
         $(document).on('DOMNodeInserted', this.domRoot, function () {
             self.map.invalidateSize();
@@ -56,6 +67,7 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
     Map.create = function (opts) {
         return new Map(opts);
     };
+    Map.activeMap = null;
     Map.map = {};
     Map.yagaExtensionName = 'Map';
 
