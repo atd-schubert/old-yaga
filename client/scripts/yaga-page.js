@@ -55,7 +55,7 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
         this.header = Toolbar.create(opts.header);
         this.domRoot.appendChild(this.header.domRoot);
 
-        this.content = Content.create(opts.content)
+        this.content = Content.create(opts.content);
         this.domRoot.appendChild(this.content.domRoot);
 
         this.footer = Toolbar.create(opts.footer);
