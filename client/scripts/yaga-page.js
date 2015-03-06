@@ -33,7 +33,7 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
         document = window.document;
 
         if (typeof opts.name === "string") {
-            Page.pages[opts.name] = this;
+            Page.page[opts.name] = this;
         }
 
         mkSetFn = function (name) {
@@ -102,7 +102,7 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
 
     };
     Page.prototype = new EventEmitter();
-    Page.pages = {};
+    Page.page = {};
     Page.getActivePage = function () {
         if (!$.mobile.activePage.get()[0]) {
             return null;

@@ -17,7 +17,7 @@ define('yaga-layer-tree', ['yaga', 'EventEmitter', 'jquery', 'leaflet', 'jqueryM
         opts.vectorLayers = opts.vectorLayers || [];
 
         if (typeof opts.name === "string") {
-            LayerTree.layerTrees[opts.name] = this;
+            LayerTree.layerTree[opts.name] = this;
         }
 
         this.domRoot = document.createElement('div');
@@ -58,7 +58,7 @@ define('yaga-layer-tree', ['yaga', 'EventEmitter', 'jquery', 'leaflet', 'jqueryM
         document.body.appendChild(this.domRoot);
     };
     LayerTree.prototype = new EventEmitter();
-    LayerTree.layerTrees = {};
+    LayerTree.layerTree = {};
     LayerTree.yagaExtensionName = 'LayerTree';
 
     LayerTree.create = function (opts) {

@@ -17,7 +17,14 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'jquery', 'le
         opts.style = opts.style || 'background-color: rgba(255,255,255,0.9);';
 
         if (typeof opts.name === "string") {
-            Panel.panels[opts.name] = this;
+            Panel.panel[opts.name] = this;
+            console.log('register');
+            window.addEventListener('hashchange', function () {
+                console.log("call");
+                if (window.location.hash === '#:panel.' + opts.name) {
+                    self.open();
+                }
+            }, false);
         }
 
         this.domRoot = document.createElement('div');
@@ -155,7 +162,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'jquery', 'le
         document.body.appendChild(this.domRoot);
     };
     Panel.prototype = new EventEmitter();
-    Panel.dummies = {};
+    Panel.panel = {};
     Panel.yagaExtensionName = 'Panel';
 
     Panel.create = function (opts) {

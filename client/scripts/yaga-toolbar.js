@@ -13,7 +13,7 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
         document = window.document;
 
         if (typeof opts.name === "string") {
-            Toolbar.toolsbars[opts.name] = this;
+            Toolbar.toolsbar[opts.name] = this;
         }
 
         mkSetFn = function (name) {
@@ -105,7 +105,7 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
         $(this.domRoot).toolbar({ tapToggle: false });
     };
     Toolbar.prototype = new EventEmitter();
-    Toolbar.toolsbars = {};
+    Toolbar.toolsbar = {};
     Toolbar.create = function (opts) {
         return new Toolbar(opts);
     };

@@ -13,7 +13,7 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
         opts.leaflet = opts.leaflet || {};
 
         if (typeof opts.name === "string") {
-            Map.maps[opts.name] = this;
+            Map.map[opts.name] = this;
         }
 
         mkSetFn = function (name) {
@@ -56,7 +56,7 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
     Map.create = function (opts) {
         return new Map(opts);
     };
-    Map.maps = {};
+    Map.map = {};
     Map.yagaExtensionName = 'Map';
 
     yaga.registerExtension(Map);
