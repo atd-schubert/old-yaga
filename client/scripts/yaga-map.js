@@ -29,6 +29,7 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
         };
 
         this.domRoot = document.createElement('div');
+        this.domRoot._yagaExtension = this;
 
         this.map = L.map(this.domRoot, opts.leaflet);
 

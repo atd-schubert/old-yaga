@@ -49,6 +49,7 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
         };
 
         this.domRoot = document.createElement('div');
+        this.domRoot._yagaExtension = this;
         this.domRoot.setAttribute('data-role', 'page');
 
         this.header = Toolbar.create(opts.header);

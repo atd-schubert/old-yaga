@@ -18,6 +18,7 @@ define('yaga-panel', ['yaga-core', 'jquery', 'EventEmitter'], function (yaga, $,
         EventEmitter.call(this);
 
         this.domRoot = window.document.create('div');
+        this.domRoot._yagaExtension = this;
         this.domRoot.setAttribute('data-role', 'panel');
 
         this.setPosition = function (value) {

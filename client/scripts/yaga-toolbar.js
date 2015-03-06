@@ -29,6 +29,7 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
         };
 
         this.domRoot = document.createElement('div');
+        this.domRoot._yagaExtension = this;
         titleElem = document.createElement('h2');
         titleText = document.createTextNode('');
         titleElem.appendChild(titleText);
