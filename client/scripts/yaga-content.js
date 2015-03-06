@@ -58,6 +58,6 @@ define('yaga-content', ['yaga-core', 'jquery'], function (yaga, $) {
         return new Content(opts);
     };
 
-    yaga.Content = Content;
+    yaga.registerExtension('Content', Content);
     return Content;
 });

@@ -57,6 +57,6 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
     };
     Map.maps = {};
 
-    yaga.Map = Map;
+    yaga.registerExtension('Map', Map);
     return Map;
 });

@@ -106,6 +106,6 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
         return new Page(opts);
     };
 
-    yaga.Page = Page;
+    yaga.registerExtension('Page', Page);
     return Page;
 });

@@ -88,5 +88,7 @@ define('yaga-panel', ['yaga-core', 'jquery', 'EventEmitter'], function (yaga, $,
     Panel.create = function (opts) {
         return new Panel(opts);
     };
+
+    yaga.registerExtension('Panel', Panel);
     return Panel;
 });
