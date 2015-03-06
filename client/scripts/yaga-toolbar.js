@@ -109,7 +109,8 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
     Toolbar.create = function (opts) {
         return new Toolbar(opts);
     };
+    Toolbar.yagaExtensionName = 'Toolbar';
 
-    yaga.registerExtension('Toolbar', Toolbar);
+    yaga.registerExtension(Toolbar);
     return Toolbar;
 });

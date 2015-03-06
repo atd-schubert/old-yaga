@@ -57,7 +57,8 @@ define('yaga-content', ['yaga-core', 'jquery'], function (yaga, $) {
     Content.create = function (opts) {
         return new Content(opts);
     };
+    Content.yagaExtensionName = 'Content';
 
-    yaga.registerExtension('Content', Content);
+    yaga.registerExtension(Content);
     return Content;
 });

@@ -3,12 +3,12 @@ define('yaga-core', ['EventEmitter'], function (EventEmitter) {
     'use strict';
     var yaga = new EventEmitter();
 
-    yaga.registerExtension = function (name, ext) {
-        if (yaga[name]) {
-            throw new Error('There is already an enxtension with the name "' + name + '"');
+    yaga.registerExtension = function (ext) {
+        if (yaga[ext.yagaExtensionName]) {
+            throw new Error('There is already an enxtension with the name "' + ext.yagaExtensionName + '"');
         }
-        yaga[name] = ext;
-        yaga.emit('registerExtension', {name: name, extension: ext});
+        yaga[ext.yagaExtensionName] = ext;
+        yaga.emit('registerExtension', ext);
     };
     return yaga;
 });

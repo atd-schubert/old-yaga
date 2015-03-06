@@ -59,12 +59,12 @@ define('yaga-layer-tree', ['yaga', 'EventEmitter', 'jquery', 'leaflet', 'jqueryM
     };
     LayerTree.prototype = new EventEmitter();
     LayerTree.layerTrees = {};
-    LayerTree.name = 'LayerTree';
+    LayerTree.yagaExtensionName = 'LayerTree';
 
     LayerTree.create = function (opts) {
         return new LayerTree(opts);
     };
 
-    yaga.registerExtension('LayerTree', LayerTree);
+    yaga.registerExtension(LayerTree);
     return LayerTree;
 });

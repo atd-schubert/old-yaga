@@ -106,7 +106,8 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
     Page.create = function (opts) {
         return new Page(opts);
     };
+    Page.yagaExtensionName = 'Page';
 
-    yaga.registerExtension('Page', Page);
+    yaga.registerExtension(Page);
     return Page;
 });
