@@ -15,7 +15,7 @@ require(['yaga'], function (yaga) {
     'use strict';
     console.warn('Globel export of yaga!', window.yaga = yaga);
     console.log('Yaga is started...');
-    var p = yaga.Page.create({name: 'test', header:{title: 'Yaga for my Draga'},content: {content: yaga.Map.create({name: 'test'}).domRoot}});
+    var p = yaga.Page.create({name: 'test', header: {title: 'Yaga for my Draga'}, content: {content: yaga.Map.create({name: 'test'}).domRoot}});
     p.open();
-    console.log(yaga.Map.maps.test);
+    console.log(yaga.Map.map.test);
 });
