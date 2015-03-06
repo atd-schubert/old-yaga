@@ -103,6 +103,15 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
     };
     Page.prototype = new EventEmitter();
     Page.pages = {};
+    Page.getActivePage = function () {
+        if (!$.mobile.activePage.get()[0]) {
+            return null;
+        }
+        if ($.mobile.activePage.get()[0].hasOwnProperty('_yagaExtension')) {
+            return $.mobile.activePage.get()[0]._yagaExtension;
+        }
+        return $.mobile.activePage.get()[0];
+    };
     Page.create = function (opts) {
         return new Page(opts);
     };
