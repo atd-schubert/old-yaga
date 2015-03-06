@@ -6,12 +6,10 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
     document = window.document;
 
     Map = function YagaMap(opts) {
-        console.log(this);
         var mkGetFn, mkSetFn, self;
         self = this;
         opts = opts || {};
         opts.style = opts.style || 'position:fixed; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;';
-        //opts.id = opts.id || 'yaga-map-' + Date.now();
         opts.leaflet = opts.leaflet || {};
 
         if (typeof opts.name === "string") {
@@ -32,9 +30,7 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'jqueryMob
 
         this.domRoot = document.createElement('div');
 
-
         this.map = L.map(this.domRoot, opts.leaflet);
-
 
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

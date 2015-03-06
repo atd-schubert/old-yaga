@@ -102,7 +102,7 @@ define('yaga-page', ['yaga-core', 'yaga-toolbar', 'yaga-content', 'yaga-map', 'j
     };
     Page.prototype = new EventEmitter();
     Page.pages = {};
-    Page.create = function (opts){
+    Page.create = function (opts) {
         return new Page(opts);
     };
 
