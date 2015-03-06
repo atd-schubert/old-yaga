@@ -1,49 +1,75 @@
 /*globals define, window*/
-define('yaga-layer-tree-panel', ['jquery', 'leaflet', 'EventEmitter', 'underscore'], function ($, L, EventEmitter, _) {
+
+define('yaga-tile-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function YagaTileLayer(yaga, EventEmitter, L) {
     'use strict';
-    var TileLayer, tiles;
-    TileLayer = function (url, opts) {
-        if (!opts.name) {
-            throw new Error('Your tile layer has to have a name in options');
+    var TileLayer;
+
+    TileLayer = function YagaTileLayer(opts) {
+        var self;
+        self = this;
+        opts = opts || {
+            url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            minZoom: 8,
+            maxZoom: 12,
+            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            name: 'OSM',
+            caption: 'OpenStreetMap international'
+        };
+
+        if (!opts.url) {
+            throw new Error('You have to specify an url of an tile-layer');
         }
-        _.extend(this, L.tileLayer(url, opts));
+        opts.caption = opts.caption || opts.name || 'Unknown Tile layer "' + opts.url + '"';
 
-        this.show = function () {
-            this.addTo(yaga.map);
-            this.displayed = true;
+        if (typeof opts.name === "string") {
+            TileLayer.tileLayer[opts.name] = this;
+        }
+
+        this.caption = opts.caption;
+        this.leaflet = new L.TileLayer(opts.url, opts);
+
+        // pipe events
+        this.leaflet.on('loading', function (event) {
+            self.emit('loading', event);
+        });
+        this.leaflet.on('load', function (event) {
+            self.emit('load', event);
+        });
+        this.leaflet.on('tileloadstart', function (event) {
+            self.emit('tileloadstart', event);
+        });
+        this.leaflet.on('tileload', function (event) {
+            self.emit('tileload', event);
+        });
+        this.leaflet.on('tileunload', function (event) {
+            self.emit('tileunload', event);
+        });
+
+        this.show = function (res) {
+            res = res || yaga.Map.activeMap;
+            if (!res) {
+                return;
+            }
+            this.emit('show', res);
+            this.leaflet.addTo(res.leaflet);
         };
-
-        this.hide = function () {
-            yaga.map.removeLayer(this);
-            this.displayed = false;
+        this.hide = function (res) {
+            res = res || yaga.Map.activeMap;
+            if (!res) {
+                return;
+            }
+            this.emit('hide', res);
+            res.leaflet.removeLayer(this.leaflet);
         };
-
     };
-
     TileLayer.prototype = new EventEmitter();
+    TileLayer.tileLayer = {};
+    TileLayer.yagaExtensionName = 'TileLayer';
 
-    TileLayer.create = function () {
-        return new TileLayer(url, opts);
-
-
-        var tile = L.tileLayer(url, opts);
-        if (!opts.name) {
-            throw new Error('Your tile layer has to have a name in options');
-        }
-        tile.name = opts.name;
-        tile.caption = opts.caption;
-        tile.displayed = false;
-
-        tile.show = function () {
-            this.addTo(yaga.map);
-            this.displayed = true;
-        };
-        tile.hide = function () {
-        };
-
-        tileLayers[opts.name] = tile;
-        return tile;
+    TileLayer.create = function (opts) {
+        return new TileLayer(opts);
     };
 
-    return tileLayer;
+    yaga.registerExtension(TileLayer);
+    return TileLayer;
 });
