@@ -15,10 +15,13 @@ define('yaga-hash-command', ['yaga-core', 'EventEmitter'], function YagaDummy(ya
             throw new Error('YagaHashCommand has to have a command as Function within its argument object.');
         }
 
-        HashCommand.hashCommand[opts.name] = this;
+        if (opts.name) {
+            HashCommand.hashCommand[opts.name] = this;
+        }
 
         this.run = function (hash) {
             if (this.regExp.test(hash)) {
+                this.emit('run', hash);
                 this.command(hash, this);
             }
         };
