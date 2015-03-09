@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8575699-2da0-4426-874d-eb8c45dbd86e" name="Default" comment="">
+    <list default="true" id="c8575699-2da0-4426-874d-eb8c45dbd86e" name="Default" comment="adding names for layer">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/Gruntfile.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/scripts/yaga-layer-group.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/scripts/yaga-layer.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/scripts/yaga-layer-tree-tool.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/scripts/yaga-listview-entry.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/scripts/yaga-listview.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/scripts/yaga-layer-tree-panel.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/scripts/main.js" afterPath="$PROJECT_DIR$/client/scripts/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/scripts/yaga-layer.js" afterPath="$PROJECT_DIR$/client/scripts/yaga-layer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/scripts/yaga-map.js" afterPath="$PROJECT_DIR$/client/scripts/yaga-map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/scripts/yaga-panel.js" afterPath="$PROJECT_DIR$/client/scripts/yaga-panel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/scripts/yaga.js" afterPath="$PROJECT_DIR$/client/scripts/yaga.js" />
     </list>
     <ignored path="yaga.iws" />
@@ -31,57 +37,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/index.html">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/scripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="1170">
-              <caret line="9" column="35" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1230">
+              <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="yaga.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/scripts/yaga.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="yaga-panel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-panel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.222221" vertical-offset="0" max-vertical-offset="2760">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="yaga-map.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-map.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7777777" vertical-offset="0" max-vertical-offset="3435">
-              <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="yaga-layer.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="yaga-layer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/scripts/yaga-layer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.042735044" vertical-offset="0" max-vertical-offset="702">
-              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+            <state vertical-scroll-proportion="-12.777778" vertical-offset="60" max-vertical-offset="825">
+              <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -89,11 +59,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="yaga-page.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-page.js">
+      <file leaf-file-name="yaga-layer-tree-tool.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-layer-tree-tool.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="1905">
-              <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+            <state vertical-scroll-proportion="-27.222221" vertical-offset="0" max-vertical-offset="1020">
+              <caret line="49" column="56" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="yaga-listview-entry.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-listview-entry.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="393" max-vertical-offset="1215">
+              <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="yaga-listview.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-listview.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+              <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -102,8 +96,18 @@
       <file leaf-file-name="yaga-tile-layer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/scripts/yaga-tile-layer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1200">
-              <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+            <state vertical-scroll-proportion="-12.777778" vertical-offset="0" max-vertical-offset="1200">
+              <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="yaga-hash-command.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-hash-command.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="795">
+              <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -114,18 +118,18 @@
       <file leaf-file-name="_yaga.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/scripts/_yaga.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1767" max-vertical-offset="2955">
-              <caret line="129" column="85" selection-start-line="129" selection-start-column="38" selection-end-line="129" selection-end-column="85" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2149" max-vertical-offset="2955">
+              <caret line="170" column="21" selection-start-line="170" selection-start-column="21" selection-end-line="170" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="yaga-dummy.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-dummy.js">
+      <file leaf-file-name="yaga-panel.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/scripts/yaga-panel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
-              <caret line="15" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2790">
+              <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -133,12 +137,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/scripts/main.js">
+      <file leaf-file-name="Gruntfile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/Gruntfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
-              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-              <folding />
+            <state vertical-scroll-proportion="0.23391813" vertical-offset="0" max-vertical-offset="1539">
+              <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,7 +159,6 @@
       <list>
         <option value="$PROJECT_DIR$/client/scripts/underscore.js" />
         <option value="$PROJECT_DIR$/client/scripts/EventEmitter.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-layer-tree-panel.js" />
         <option value="$PROJECT_DIR$/client/.bowerrc" />
         <option value="$PROJECT_DIR$/client/component.json" />
         <option value="$PROJECT_DIR$/client/scripts/vendor/openlayers/build/OpenLayers.js" />
@@ -165,19 +170,25 @@
         <option value="$PROJECT_DIR$/client/styles/main.css" />
         <option value="$PROJECT_DIR$/client/scripts/vendor/yaga-dummy.js" />
         <option value="$PROJECT_DIR$/client/scripts/yaga-core.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-content.js" />
         <option value="$PROJECT_DIR$/client/index.html" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-dummy.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-layer-tree.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-toolbar.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-hash-command.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-panel.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-page.js" />
-        <option value="$PROJECT_DIR$/client/scripts/main.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-tile-layer.js" />
-        <option value="$PROJECT_DIR$/client/scripts/yaga-map.js" />
         <option value="$PROJECT_DIR$/client/scripts/yaga.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-layer-tree-panel.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-map.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-page.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-toolbar.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-layer-tree.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-content.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-dummy.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-hash-command.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-tile-layer.js" />
+        <option value="$PROJECT_DIR$/client/scripts/main.js" />
         <option value="$PROJECT_DIR$/client/scripts/yaga-layer.js" />
+        <option value="$PROJECT_DIR$/client/scripts/_yaga.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-listview-entry.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-listview.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-layer-tree-tool.js" />
+        <option value="$PROJECT_DIR$/client/scripts/yaga-panel.js" />
+        <option value="$PROJECT_DIR$/client/Gruntfile.js" />
       </list>
     </option>
   </component>
@@ -185,8 +196,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="x" value="1280" />
+    <option name="y" value="-1120" />
+    <option name="width" value="1080" />
+    <option name="height" value="1920" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -293,6 +306,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="FullScreen" value="true" />
     <property name="SearchEverywhereHistoryKey" value="comment&#9;ACTION&#9;CommentByBlockComment" />
+    <property name="recentsLimit" value="5" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -302,7 +316,12 @@
       <recent name="$PROJECT_DIR$/client/scripts" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.yaga-listview-entry.js">
+    <configuration default="false" name="yaga-listview-entry.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="yaga-listview-entry.js" working-dir="$PROJECT_DIR$/client/scripts">
+      <RunnerSettings RunnerId="Basic" />
+      <ConfigurationWrapper RunnerId="Basic" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -352,7 +371,14 @@
       <envs />
       <method />
     </configuration>
-    <list size="0" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.yaga-listview-entry.js" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.yaga-listview-entry.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -557,7 +583,31 @@
       <option name="project" value="LOCAL" />
       <updated>1425672484062</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="introducing dynamic creating of different layer types">
+      <created>1425673608001</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1425673608001</updated>
+    </task>
+    <task id="LOCAL-00034" summary="adding names for layer">
+      <created>1425673822609</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1425673822609</updated>
+    </task>
+    <task id="LOCAL-00035" summary="adding names for layer">
+      <created>1425674136111</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1425674136111</updated>
+    </task>
+    <task id="LOCAL-00036" summary="add events">
+      <created>1425752788114</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1425752788114</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -581,11 +631,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="1280" y="-1120" width="1080" height="1920" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15342465" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15297297" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -596,8 +646,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29768786" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12972973" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -643,9 +693,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="fix wrong id for map" />
-    <MESSAGE value="remove openlayers" />
-    <MESSAGE value="insert leaflet" />
     <MESSAGE value="Connect toolbars with mapevents" />
     <MESSAGE value="Correct timing and Panel class" />
     <MESSAGE value="remove zoom control" />
@@ -668,7 +715,10 @@
     <MESSAGE value="adding hashCommand to yaga" />
     <MESSAGE value="adding hashCommands Event pipes und self returns" />
     <MESSAGE value="working version of tilelayer" />
-    <option name="LAST_COMMIT_MESSAGE" value="working version of tilelayer" />
+    <MESSAGE value="introducing dynamic creating of different layer types" />
+    <MESSAGE value="adding names for layer" />
+    <MESSAGE value="add events" />
+    <option name="LAST_COMMIT_MESSAGE" value="add events" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -922,6 +972,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3327674" vertical-offset="584" max-vertical-offset="2955">
           <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -941,28 +992,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-layer-tree-panel.js">
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-core.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-content.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.814815" vertical-offset="380" max-vertical-offset="1035">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="43" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -971,33 +1004,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/yaga-layer-tree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.333333" vertical-offset="60" max-vertical-offset="1125">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-toolbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.185185" vertical-offset="1087" max-vertical-offset="1740">
-          <caret line="94" column="32" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="32" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1862#1939#0" expanded="false" />
-            <element signature="e#1977#2028#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-hash-command.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2222223" vertical-offset="0" max-vertical-offset="750">
-          <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.72136223" vertical-offset="479" max-vertical-offset="1125">
+          <caret line="63" column="20" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1009,62 +1018,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/index.html">
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-toolbar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="1170">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.222221" vertical-offset="0" max-vertical-offset="2760">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6981424" vertical-offset="1094" max-vertical-offset="1740">
+          <caret line="108" column="18" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/_yaga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1767" max-vertical-offset="2955">
-          <caret line="129" column="85" selection-start-line="129" selection-start-column="38" selection-end-line="129" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1905">
-          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-tile-layer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1200">
-          <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1862#1939#0" expanded="false" />
+            <element signature="e#1977#2028#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/yaga-map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7777777" vertical-offset="0" max-vertical-offset="3435">
-          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.33281735" vertical-offset="2515" max-vertical-offset="3435">
+          <caret line="182" column="16" selection-start-line="182" selection-start-column="8" selection-end-line="182" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-content.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19349845" vertical-offset="175" max-vertical-offset="1035">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -1073,28 +1052,126 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/yaga-dummy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
-          <caret line="15" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.21671827" vertical-offset="55" max-vertical-offset="1065">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/yaga.js">
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.022222223" vertical-offset="0" max-vertical-offset="675">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="14" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52991456" vertical-offset="483" max-vertical-offset="1905">
+          <caret line="57" column="37" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0" vertical-offset="60" max-vertical-offset="1170">
+          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-tile-layer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.777778" vertical-offset="0" max-vertical-offset="1200">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1230">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/yaga-layer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.042735044" vertical-offset="0" max-vertical-offset="702">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        <state vertical-scroll-proportion="-12.777778" vertical-offset="60" max-vertical-offset="825">
+          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/_yaga.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2149" max-vertical-offset="2955">
+          <caret line="170" column="21" selection-start-line="170" selection-start-column="21" selection-end-line="170" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-listview-entry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="393" max-vertical-offset="1215">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-listview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+          <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-hash-command.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="795">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-layer-tree-tool.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.222221" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="49" column="56" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/scripts/yaga-panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2790">
+          <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23391813" vertical-offset="0" max-vertical-offset="1539">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
