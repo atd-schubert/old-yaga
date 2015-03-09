@@ -52,6 +52,7 @@ module.exports = function wheregroupTaskRunner(grunt) {
                 options: {
                     keepalive: true,
                     port: 3000,
+                    open: true,
                     hostname: '*',
                     base: {
                         path: './',
