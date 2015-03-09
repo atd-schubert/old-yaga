@@ -13,3 +13,6 @@
 .leaflet-bottom {
     bottom: 50px;
 }
+.ui-page .ui-footer-fixed.ui-fixed-hidden, .ui-page .ui-header-fixed.ui-fixed-hidden { /* fix for hidden toolbar */
+    display: none;
+}
