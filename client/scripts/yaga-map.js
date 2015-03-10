@@ -10,6 +10,11 @@ define('yaga-map', ['yaga-core', 'leaflet', 'jquery', 'EventEmitter', 'yaga-hash
         self = this;
         opts = opts || {};
         opts.style = opts.style || 'position:fixed; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;';
+        opts.layers = opts.layers || [
+            {
+                layerType: 'yaga-tile-layer'
+            }
+        ];
         opts.leaflet = opts.leaflet || {};
 
         if (typeof opts.name === "string") {

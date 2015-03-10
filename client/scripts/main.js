@@ -11,11 +11,33 @@ require.config({
     baseUrl: 'scripts/'
 });
 
-require(['yaga'], function (yaga) {
+define('main', ['yaga', 'yaga-layer-tree-tool', 'yaga-layer-set'], function (yaga, LayerTreeTool) {
     'use strict';
+    var map, page;
     console.warn('Globel export of yaga!', window.yaga = yaga);
     console.log('Yaga is started...');
-    var p = yaga.Page.create({name: 'test', header: {title: 'Yaga for my Draga'}, content: {content: yaga.Map.create({name: 'test'}).domRoot}});
-    p.open();
-    console.log(yaga.Map.map.test);
+
+    map = yaga.Map.create({name: 'test'});
+
+
+    page = yaga.Page.create({name: 'test', header: {title: 'Yaga for my Draga'}, content: {content: map.domRoot}});
+    page.on('open', function () {
+        map.activate();
+    });
+    page.open();
+
+    LayerTreeTool.create({name: 'layertree'});
+    var a = document.createElement('a');
+    a.appendChild(document.createTextNode('layertree'));
+    a.setAttribute('class', 'ui-btn ui-btn-icon-notext ui-icon-grid');
+    $(a).on('click', function () {
+        setTimeout(function () {
+            yaga.Panel.panel.layertree.open();
+        }, 10);
+
+    });
+    $(yaga.Page.page.test.footer.domRoot).html('').append(a);
+
+    //yaga.Layer.layer.osmde.show();
+
 });

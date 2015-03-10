@@ -24,7 +24,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
                 },
                 regExp: {
                     test: function (path) {
-                        return path === ('#:panel.' + opts.name);
+                        return path === ('#:panel.open:' + opts.name);
                     }
                 }
             });
@@ -34,10 +34,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
         this.domRoot.setAttribute('data-role', 'panel');
         this.domRoot._yagaExtension = this;
 
-        this.content = Content.create(opts.content);
-        this.domRoot.appendChild(this.content.domRoot);
-
-        /*this.setContent = function (value) {
+        this.setContent = function (value) {
             this.emit('setContent', value);
             var $domRoot = $(this.domRoot);
             $domRoot.html('');
@@ -46,7 +43,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
         };
         this.getContent = function () {
             return this.domRoot.childNodes;
-        };*/
+        };
         this.setId = function (value) {
             this.emit('setId', value);
             this.domRoot.setAttribute('id', value);
@@ -101,9 +98,16 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
             return this.domRoot.hasAttribute('data-persistent');
         };
 
-        this.open = function () {
+        this.open = function () { // TODO: append to active page!
+            var $panel, onClickOutside, activePage;
             this.emit('open');
-            var $panel, onClickOutside;
+            activePage = null;
+            if (yaga.Page && typeof yaga.Page.getActivePage === 'function') {
+                activePage = yaga.Page.getActivePage();
+            }
+            if (activePage) {
+                activePage.domRoot.appendChild(this.domRoot);
+            }
             $panel = $(this.domRoot);
             $panel.trigger('create');
             $panel.panel('open');
@@ -125,6 +129,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
             if (!this.getPersistent()) {
                 $(document).one('click', onClickOutside);
             }
+            this.emit('opened');
         };
         this.close = function () {
             this.emit('close');
@@ -154,6 +159,9 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
         }
         if (opts.persistent) {
             this.setPersistent(opts.persistent);
+        }
+        if (opts.content) {
+            this.setContent(opts.content);
         }
 
         $(this.domRoot).panel().enhanceWithin();//('create');

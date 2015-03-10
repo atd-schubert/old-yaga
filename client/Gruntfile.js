@@ -62,6 +62,31 @@ module.exports = function wheregroupTaskRunner(grunt) {
                         }
                     }
                 }
+            },
+            dist: {
+                options: {
+                    keepalive: true,
+                    port: 3000,
+                    open: true,
+                    hostname: '*',
+                    base: {
+                        path: './',
+                        options: {
+                            index: 'dist.html',
+                            maxAge: 300000
+                        }
+                    }
+                }
+            }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    name: 'app',
+                    baseUrl: 'scripts',
+                    mainConfigFile: 'scripts/main.js',
+                    out: 'scripts/yaga-compiled.js'
+                }
             }
         }
     });
@@ -76,5 +101,13 @@ module.exports = function wheregroupTaskRunner(grunt) {
      */
     grunt.loadNpmTasks('grunt-contrib-connect');
 
+    /**
+     * Task for opening static files in a virtual server
+     * @link https://github.com/gruntjs/grunt-contrib-requirejs - Github
+     * @requires grunt-contrib-requirejs/tasks/requirejs.js
+     */
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+
+    grunt.registerTask('show-dist', ['requirejs', 'connect:dist']);
     grunt.registerTask('default', ['connect:client']);
 };

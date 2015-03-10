@@ -38,7 +38,7 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
         this.setRole = mkSetFn('data-role');
         this.getRole = mkGetFn('data-role');
 
-        this.setFullscreen = function (bool){
+        this.setFullscreen = function (bool) {
             if (bool) {
                 this.domRoot.setAttribute('data-fullscreen', 'true');
                 $(this.domRoot).addClass('ui-' + this.getRole() + '-fullscreen');
@@ -55,7 +55,7 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
 
 
 
-        this.setTitle = function (title){
+        this.setTitle = function (title) {
             titleText.nodeValue = title;
             return self;
         };
@@ -80,16 +80,15 @@ define('yaga-toolbar', ['yaga-core', 'jquery', 'EventEmitter', 'jqueryMobile'], 
             return this;
         };
         this.toggle = function () {
-            $elem.toolbar('toggle');
+            $(this.domRoot).toolbar('toggle');
             return this;
         };
 
         this.getStatus = function () {
             if ($(this.domRoot).hasClass('ui-fixed-hidden')) {
                 return 'hidden';
-            } else {
-                return 'shown';
             }
+            return 'shown';
         };
 
         this.setRole(opts.role);

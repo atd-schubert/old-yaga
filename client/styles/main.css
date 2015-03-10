@@ -16,3 +16,16 @@
 .ui-page .ui-footer-fixed.ui-fixed-hidden, .ui-page .ui-header-fixed.ui-fixed-hidden { /* fix for hidden toolbar */
     display: none;
 }
+.yaga-btn-active {
+    background-color: #ccffcc !important;
+}
+.yaga-btn-deactive {
+    background-color: #ffcccc !important;
+}
+
+.yaga-layer-tree-item .ui-li-count {
+    top: 47px
+}
+.yaga-layer-tree-item.ui-li-has-count {
+    padding-right: 1em !important;
+}
