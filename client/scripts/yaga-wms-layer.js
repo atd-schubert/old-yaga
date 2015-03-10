@@ -7,7 +7,7 @@ define('yaga-wms-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function Yaga
     WmsLayer = function YagaWmsLayer(opts) {
         var self;
         self = this;
-        opts = { // opts ||
+        opts = opts || {
             url: 'http://www.wms.nrw.de/geobasis/wms_nw_dtk?', // ?REQUEST=GetCapabilities&SERVICE=WMS
             layers: ['nw_dtk_pan', 'nw_dtk_col'],
             format: 'image/png',

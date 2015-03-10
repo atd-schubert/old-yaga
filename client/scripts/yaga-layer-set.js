@@ -3,11 +3,14 @@
 define('yaga-layer-set', ['yaga', 'yaga-wms-layer'], function (yaga) {
     'use strict';
     yaga.Layer.create({
-        layerType: 'WmsLayer',
-        //url: 'http://tile.memomaps.de/tilegen/{z}/{x}/{y}.png',
-        name: 'wms'
-        //attribution: '&copy; <a href="http://öpnvkarte.de/?zoom=7&lat=51.935&lon=9.01&layers=TBTTT">ÖPNV-Karte</a>',
-        //caption: 'ÖPNV Karte'
+        url: 'http://www.wms.nrw.de/geobasis/wms_nw_dtk?', // ?REQUEST=GetCapabilities&SERVICE=WMS
+        layers: ['nw_dtk_pan', 'nw_dtk_col'],
+        format: 'image/png',
+        transparent: true,
+        maxZoom: 20, //default is 18
+        attribution: "&copy Geobasis NRW",
+        name: 'WMS',
+        caption: 'WMS NRW'
     });
 
 
