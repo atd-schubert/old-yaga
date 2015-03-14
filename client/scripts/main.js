@@ -11,7 +11,7 @@ require.config({
     baseUrl: 'scripts/'
 });
 
-define('main', ['yaga', 'yaga-layer-tree-tool', 'yaga-layer-set'], function (yaga, LayerTreeTool) {
+define('main', ['yaga', 'yaga-layer-tree-tool', 'yaga-layer-set', 'yaga-local-storage', 'yaga-local-geojson-store'], function (yaga, LayerTreeTool) {
     'use strict';
     var map, page;
     console.warn('Globel export of yaga!', window.yaga = yaga);
@@ -26,7 +26,9 @@ define('main', ['yaga', 'yaga-layer-tree-tool', 'yaga-layer-set'], function (yag
     });
     page.open();
 
-    LayerTreeTool.create({name: 'layertree'});
+    yaga.LocalGeojsonStore.create({name: 'draga'});
+
+    LayerTreeTool.create({name: 'layertree', layers: [yaga.LocalGeojsonStore.localGeojsonStore.draga.layer, yaga.Layer.layer.opnv, yaga.Layer.layer.osmde, yaga.Layer.layer.googlesatelite]});
     var a = document.createElement('a');
     a.appendChild(document.createTextNode('layertree'));
     a.setAttribute('class', 'ui-btn ui-btn-icon-notext ui-icon-grid');

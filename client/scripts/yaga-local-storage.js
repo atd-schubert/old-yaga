@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-local-storage', ['yaga', 'EventEmitter'], function YagaLocalStorage(yaga, EventEmitter) {
+define('yaga-local-storage', ['yaga-core', 'EventEmitter'], function YagaLocalStorage(yaga, EventEmitter) {
     'use strict';
     var LocalStorage, readLs, writeLs, lsPrefix, lsDivider, lsInternalDivider;
 
@@ -10,6 +10,7 @@ define('yaga-local-storage', ['yaga', 'EventEmitter'], function YagaLocalStorage
 
     readLs = function (storeName, opts) {
         var rg;
+        opts = opts || {};
         rg = window.localStorage.getItem(storeName);
 
         if (!rg && opts.default) {
@@ -49,6 +50,7 @@ define('yaga-local-storage', ['yaga', 'EventEmitter'], function YagaLocalStorage
             return lsPrefix + lsDivider + name;
         };
         this.save = function () {
+            self.emit('save');
             writeLs(this.getPath(), this.data);
         };
         this.remove = function () {
@@ -77,7 +79,7 @@ define('yaga-local-storage', ['yaga', 'EventEmitter'], function YagaLocalStorage
             return ls.clear();
         }
         for (hash in LocalStorage.localStorage) {
-            LocalStorage.localStorage.remove();
+            LocalStorage.localStorage[hash].remove();
         }
     };
     LocalStorage.yagaExtensionName = 'LocalStorage';

@@ -7,7 +7,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
     document = window.document;
 
     Panel = function YagaPanel(opts) {
-        var self;
+        var self, isPersistent, innerClick;
         self = this;
         opts = opts || {};
         opts.position = opts.position || 'right';
@@ -32,6 +32,7 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
 
         this.domRoot = document.createElement('div');
         this.domRoot.setAttribute('data-role', 'panel');
+        this.domRoot.setAttribute('data-persistent', 'true');
         this.domRoot._yagaExtension = this;
 
         this.setContent = function (value) {
@@ -87,19 +88,15 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
         };
         this.setPersistent = function (value) {
             this.emit('setPersistent', value);
-            if (value) {
-                this.domRoot.setAttribute('data-persistent', 'true');
-            } else {
-                this.domRoot.removeAttribute('data-persistent');
-            }
+            isPersistent = value;
             return this;
         };
         this.getPersistent = function () {
-            return this.domRoot.hasAttribute('data-persistent');
+            return isPersistent;
         };
 
-        this.open = function () { // TODO: append to active page!
-            var $panel, onClickOutside, activePage;
+        this.open = function () {
+            var $panel, activePage;
             this.emit('open');
             activePage = null;
             if (yaga.Page && typeof yaga.Page.getActivePage === 'function') {
@@ -112,23 +109,6 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
             $panel.trigger('create');
             $panel.panel('open');
 
-            onClickOutside = function (event) {
-                var target = event.target;
-                if (target === self.domRoot) {
-                    return $(document).one('click', onClickOutside);
-                }
-                while (target.parentNode) {
-                    target = target.parentNode;
-                    if (target === self.domRoot) {
-                        return $(document).one('click', onClickOutside);
-                    }
-                }
-                return self.close();
-            };
-
-            if (!this.getPersistent()) {
-                $(document).one('click', onClickOutside);
-            }
             this.emit('opened');
         };
         this.close = function () {
@@ -136,6 +116,9 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
             var $panel;
             $panel = $(this.domRoot);
             $panel.panel('close');
+        };
+        this.isActive = function () {
+            return !$(this.domRoot).hasClass('ui-panel-closed');
         };
 
         if (opts.id) {
@@ -166,8 +149,14 @@ define('yaga-panel', ['yaga-core', 'EventEmitter', 'yaga-content', 'yaga-hash-co
 
         $(this.domRoot).panel().enhanceWithin();//('create');
 
-        $(document).on('DOMNodeInserted', this.domRoot, function () {
-            //this.dummy(); // make a resize or something else
+        $(this.domRoot).on('click', function () {
+            innerClick = true;
+        });
+        $(document).on('click', function () {
+            if (!innerClick && self.isActive() && !self.getPersistent()) {
+                self.close();
+            }
+            innerClick = false;
         });
 
         document.body.appendChild(this.domRoot);

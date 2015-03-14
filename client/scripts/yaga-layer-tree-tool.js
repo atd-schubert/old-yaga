@@ -25,7 +25,7 @@ define('yaga-layer-tree-tool', ['yaga', 'EventEmitter', 'jquery', 'yaga-panel', 
             '</div>'
         ];
 
-        if (opts.leaflet.getAttribution()) {
+        if (typeof opts.leaflet.getAttribution === 'function' && opts.leaflet.getAttribution()) {
             appendParts.push('<p>' + opts.leaflet.getAttribution() + '</p>');
         }
 
@@ -78,21 +78,46 @@ define('yaga-layer-tree-tool', ['yaga', 'EventEmitter', 'jquery', 'yaga-panel', 
             LayerTreeTool.layerTreeTool[opts.name] = this;
         }
 
+        this.wrapper = document.createElement('div');
         this.domRoot = document.createElement('ul');
         this.domRoot.setAttribute('data-role', 'listview');
         this.domRoot.setAttribute('data-filter', 'true');
         this.domRoot.setAttribute('data-filter-placeholder', 'Layer name');
 
-        if (!opts.hasOwnProperty('layer')) {
-            layers = [];
+
+        $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-edit ui-btn-inline"></span>');
+        $(this.wrapper.firstChild).on('click', function (event) {
+            console.log('Edit settings...');
+        });
+
+        $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-lock ui-btn-inline yaga-btn-deactive"></span>');
+        $(this.wrapper.firstChild).on('click', function (event) {
+            var $target = $(event.target);
+            if ($target.hasClass('yaga-btn-active')) {
+                $target.removeClass('yaga-btn-active');
+                self.panel.setPersistent(false);
+                $target.addClass('yaga-btn-deactive');
+            } else {
+                $target.removeClass('yaga-btn-deactive');
+                self.panel.setPersistent(true);
+                $target.addClass('yaga-btn-active');
+            }
+        });
+        this.wrapper.appendChild(this.domRoot);
+
+        layers = [];
+        if (opts.hasOwnProperty('layers')) {
+            for (layerName = 0; layerName < opts.layers.length; layerName += 1) {
+                tmp = new ListviewEntry(opts.layers[layerName]);
+                this.domRoot.appendChild(tmp.domRoot);
+                layers.push(tmp);
+            }
+        } else {
             for (layerName in Layer.layer) {
                 tmp = new ListviewEntry(Layer.layer[layerName]);
                 this.domRoot.appendChild(tmp.domRoot);
                 layers.push(tmp);
             }
-        } else {
-            layers = opts.layers;
-            // TODO: make this fn
         }
 
         this.setId = function (value) {
@@ -127,10 +152,12 @@ define('yaga-layer-tree-tool', ['yaga', 'EventEmitter', 'jquery', 'yaga-panel', 
         if (opts.style) {
             this.setStyle(opts.style);
         }
-        this.panel = Panel.create({content: this.domRoot, name: opts.name});
+        this.settingsWrapper = document.createElement('div');
+        this.panel = Panel.create({content: this.wrapper, name: opts.name});
+        this.settingsPanel = Panel.create({content: this.settingsWrapper, name: opts.name + 'Settings', position: 'left'});
 
         this.panel.on('opened', function () {
-            $.mobile.silentScroll(65);
+            $.mobile.silentScroll(115);
         });
 
 
