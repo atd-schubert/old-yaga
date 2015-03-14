@@ -76,7 +76,7 @@ define('yaga-local-storage', ['yaga-core', 'EventEmitter'], function YagaLocalSt
         opts = opts || {};
 
         if (opts.hard === true) {
-            return ls.clear();
+            return window.localStorage.clear();
         }
         for (hash in LocalStorage.localStorage) {
             LocalStorage.localStorage[hash].remove();
