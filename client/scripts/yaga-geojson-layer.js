@@ -22,8 +22,9 @@ define('yaga-geojson-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function 
                 },
                 "type": "Feature",
                 "properties": {
-                    "PopupContent": 'Löwenburg',
-                    "PanelContent": 'Das ist die Löwenburg... <img src="http://www.rheindrache.de/images/750px_loewenburg6.jpg"/>'
+                    _yagaPopupContent: 'Löwenburg',
+                    _yagaPanelContent: 'Das ist die Löwenburg... <img src="http://www.rheindrache.de/images/750px_loewenburg6.jpg"/>'
+
                 },
                 "id": 51
             }
@@ -196,12 +197,32 @@ define('yaga-geojson-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function 
                 self.removeFeature(this);
 
             };
+            this.bindPanel = function (content) {
+                this.leaflet.on('click', function () {
+                    self.featurePanel.setContent(content);
+                    self.featurePanel.open();
+                });
+            };
+            this.bindPopup = function (content, opts) {
+                this.leaflet.bindPopup(content, opts);
+            };
+
+            if (geojson && geojson.properties) {
+                if (geojson.properties._yagaPanelContent) {
+                    this.bindPanel(geojson.properties._yagaPanelContent);
+                }
+                if (geojson.properties._yagaPopupContent) {
+                    this.bindPopup(geojson.properties._yagaPopupContent);
+                }
+            }
 
             this.leaflet.on('dragend', function () {
+                this.emit('change');
                 self.emit('change', this);
             });
             //this.getDraggable = function () {};
         };
+        Feature.prototype = new EventEmitter()
         Feature.create = function (geojson, leafletElement) {
             var rg = new Feature(geojson, leafletElement);
             self.emit('Feature.create', rg);
@@ -287,6 +308,17 @@ define('yaga-geojson-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function 
             res.leaflet.removeLayer(this.leaflet);
             return this;
         };
+        // TODO: the following functions...
+        this.setOpacity = function (value) {
+            return this;
+        };
+        this.getOpacity = function () {
+            return null;
+        };
+        this.enablePopups = function() {};
+        this.disablePopups = function() {};
+        this.enablePanels = function() {};
+        this.disablePanels = function() {};
 
         // TODO: maybe exclude to own ext
 
