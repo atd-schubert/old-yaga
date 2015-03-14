@@ -15,6 +15,9 @@ define('yaga-local-geojson-store', ['yaga', 'EventEmitter', 'yaga-local-storage'
         LocalGeojsonStore.localGeojsonStore[opts.name] = this;
 
         this.store = yaga.LocalStorage.getStore(opts.name);
+        if (this.store.data === null) {
+            this.store.data = {};
+        }
         this.store.data.name = opts.name;
         this.layer = yaga.GeojsonLayer.create(this.store.data);
 

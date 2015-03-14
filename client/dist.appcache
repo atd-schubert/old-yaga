@@ -1,0 +1,15 @@
+CACHE MANIFEST
+dist.html
+scripts/vendor/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css
+scripts/vendor/leaflet/dist/leaflet.css
+scripts/vendor/requirejs/require.js
+scripts/main.js
+scripts/yaga-compiled.js
+scripts/yaga-local-geojson-store.js
+scripts/yaga-wms-layer.js
+scripts/yaga-layer-set.js
+styles/main.css
+
+# Images
+scripts/vendor/jquery-mobile-bower/css/images/ajax-loader.gif
+scripts/vendor/leaflet/dist/images/marker-icon.png
