@@ -3,9 +3,14 @@
 define('yaga-layer', ['yaga-core', 'yaga-tile-layer', 'yaga-hash-command', 'yaga-map'], function YagaLayer(yaga) {
     'use strict';
     var Layer;
+
     Layer = {
         yagaExtensionName: 'Layer',
         layer: {},
+        layerType: {},
+        registerLayerType: function (layerType) {
+            this.layerType[layerType.yagaExtensionName] = layerType;
+        },
         create: function (opts) {
             opts = opts || {};
             opts.layerType = opts.layerType || 'TileLayer';
