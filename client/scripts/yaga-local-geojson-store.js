@@ -22,9 +22,7 @@ define('yaga-local-geojson-store', ['yaga', 'EventEmitter', 'yaga-local-storage'
         this.layer = yaga.GeojsonLayer.create(this.store.data);
 
         this.layer.on('change', function () {
-            console.log("change", self.store.data.features[0].geometry.coordinates);
             self.store.data = self.layer.getData();
-            console.log("change", self.store.data.features[0].geometry.coordinates);
             self.store.save();
         });
     };
