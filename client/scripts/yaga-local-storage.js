@@ -65,7 +65,7 @@ define('yaga-local-storage', ['yaga-core', 'EventEmitter'], function YagaLocalSt
     LocalStorage.prototype = new EventEmitter();
     LocalStorage.localStorage = {};
     LocalStorage.getStore = function (name) {
-        return LocalStorage.localStorage[name] || LocalStorage.create({name: name});
+        return LocalStorage.localStorage[name] || LocalStorage.create({name: name, default: {}});
     };
     LocalStorage.exists = function (name) {
         var storeName = lsPrefix + lsDivider + name;
