@@ -29,3 +29,7 @@
 .yaga-layer-tree-item.ui-li-has-count {
     padding-right: 1em !important;
 }
+
+.yaga-layer-tree-item {
+    background-color: transparent !important;
+}

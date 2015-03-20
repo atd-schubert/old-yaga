@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-tile-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function YagaTileLayer(yaga, EventEmitter, L) {
+define('yaga-tile-layer', ['yaga-core', 'EventEmitter', 'leaflet', 'yaga-layer'], function YagaTileLayer(yaga, EventEmitter, L, Layer) {
     'use strict';
     var TileLayer;
 
@@ -28,22 +28,10 @@ define('yaga-tile-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function Yag
         this.caption = opts.caption;
         this.leaflet = new L.TileLayer(opts.url, opts);
 
-        // pipe events
-        this.leaflet.on('loading', function (event) {
-            self.emit('loading', event);
-        });
-        this.leaflet.on('load', function (event) {
-            self.emit('load', event);
-        });
-        this.leaflet.on('tileloadstart', function (event) {
-            self.emit('tileloadstart', event);
-        });
-        this.leaflet.on('tileload', function (event) {
-            self.emit('tileload', event);
-        });
-        this.leaflet.on('tileunload', function (event) {
-            self.emit('tileunload', event);
-        });
+        this.setOpacity = function (value) {
+            this.leaflet.setOpacity(value);
+            return this;
+        };
 
         this.show = function (res) {
             res = res || yaga.Map.activeMap;
@@ -70,6 +58,6 @@ define('yaga-tile-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function Yag
         return new TileLayer(opts);
     };
 
-    yaga.registerExtension(TileLayer);
+    Layer.registerLayerType(TileLayer);
     return TileLayer;
 });

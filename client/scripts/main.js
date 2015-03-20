@@ -28,7 +28,7 @@ define('main', ['yaga', 'yaga-layer-tree-tool', 'yaga-layer-set', 'yaga-local-st
 
     yaga.LocalGeojsonStore.create({name: 'draga'});
 
-    LayerTreeTool.create({name: 'layertree', layers: [yaga.LocalGeojsonStore.localGeojsonStore.draga.layer, yaga.Layer.layer.opnv, yaga.Layer.layer.osmde, yaga.Layer.layer.googlesatelite]});
+    LayerTreeTool.create({name: 'layertree', layers: [yaga.LocalGeojsonStore.localGeojsonStore.draga.layer, yaga.Layer.layer.opnv, yaga.Layer.layer.WMS, yaga.Layer.layer.osmde, yaga.Layer.layer.googlesatelite]});
     var a = document.createElement('a');
     a.appendChild(document.createTextNode('layertree'));
     a.setAttribute('class', 'ui-btn ui-btn-icon-notext ui-icon-grid');

@@ -32,7 +32,7 @@ define('yaga-layer-tree-tool', ['yaga', 'EventEmitter', 'jquery', 'yaga-panel', 
         $domRoot.append(appendParts.join(''));
 
         $domRoot.on('change', '.yaga-layer-opacity-slider', function (event) {
-            opts.leaflet.setOpacity(parseInt(event.target.value, 10) / 100);
+            opts.setOpacity(parseInt(event.target.value, 10) / 100);
         });
         $domRoot.on('click', '.ui-icon-eye', function (event) {
             var $target = $(event.target);
@@ -85,9 +85,36 @@ define('yaga-layer-tree-tool', ['yaga', 'EventEmitter', 'jquery', 'yaga-panel', 
         this.domRoot.setAttribute('data-filter-placeholder', 'Layer name');
 
 
-        $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-edit ui-btn-inline"></span>');
+        $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-remove ui-btn-inline">clear all</span>');
         $(this.wrapper.firstChild).on('click', function (event) {
-            console.log('Edit settings...');
+            yaga.LocalStorage.clear();
+        });
+
+        $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-location ui-btn-inline">add Point</span>');
+        $(this.wrapper.firstChild).on('click', function (event) {
+            yaga.GeojsonLayer.geojsonLayer.draga.addPoint();
+        });
+        $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-edit ui-btn-inline">edit points</span>');
+        var editStatus;
+        $(this.wrapper.firstChild).on('click', function (event) {
+            var i, status, features, $target;
+
+            features = yaga.GeojsonLayer.geojsonLayer.draga.features;
+            $target = $(event.target);
+
+            if ($target.hasClass('yaga-btn-active')) {
+                $target.removeClass('yaga-btn-active');
+                status = false;
+                $target.addClass('yaga-btn-deactive');
+            } else {
+                $target.removeClass('yaga-btn-deactive');
+                status = true;
+                $target.addClass('yaga-btn-active');
+            }
+
+            for (i = 0; i < features.length; i += 1) {
+                features[i].setDraggable(status);
+            }
         });
 
         $(this.wrapper).prepend('<span class="ui-btn ui-btn-icon-notext ui-icon-lock ui-btn-inline yaga-btn-deactive"></span>');

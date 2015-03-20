@@ -217,12 +217,12 @@ define('yaga-geojson-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function 
             }
 
             this.leaflet.on('dragend', function () {
-                this.emit('change');
+                //this.emit('change');
                 self.emit('change', this);
             });
             //this.getDraggable = function () {};
         };
-        Feature.prototype = new EventEmitter()
+        Feature.prototype = new EventEmitter();
         Feature.create = function (geojson, leafletElement) {
             var rg = new Feature(geojson, leafletElement);
             self.emit('Feature.create', rg);
@@ -248,17 +248,17 @@ define('yaga-geojson-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function 
             this.leaflet.addData(data);
             return this;
         };
-        this.addPoint = function (latlng, properties) {
+        this.addPoint = function (lnglat, properties) {
             var data;
-            if (!latlng) {
+            if (!lnglat) {
                 if (yaga.Map.activeMap) {
-                    latlng = [yaga.Map.activeMap.leaflet.getCenter().lat, yaga.Map.activeMap.leaflet.getCenter().lng];
+                    lnglat = [yaga.Map.activeMap.leaflet.getCenter().lng, yaga.Map.activeMap.leaflet.getCenter().lat];
                 } else {
-                    latlng = [0, 0];
+                    lnglat = [0, 0];
                 }
             }
             data = {
-                "geometry": {"type": "Point", "coordinates": latlng},
+                "geometry": {"type": "Point", "coordinates": lnglat},
                 "type": "Feature",
                 "properties": {}
             };

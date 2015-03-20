@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-wms-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function YagaWmsLayer(yaga, EventEmitter, L) {
+define('yaga-wms-layer', ['yaga-core', 'EventEmitter', 'leaflet', 'yaga-layer'], function YagaWmsLayer(yaga, EventEmitter, L, Layer) {
     'use strict';
     var WmsLayer;
 
@@ -35,22 +35,10 @@ define('yaga-wms-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function Yaga
         this.caption = opts.caption;
         this.leaflet = new L.TileLayer.WMS(opts.url, opts);
 
-        // pipe events
-        this.leaflet.on('loading', function (event) {
-            self.emit('loading', event);
-        });
-        this.leaflet.on('load', function (event) {
-            self.emit('load', event);
-        });
-        this.leaflet.on('tileloadstart', function (event) {
-            self.emit('tileloadstart', event);
-        });
-        this.leaflet.on('tileload', function (event) {
-            self.emit('tileload', event);
-        });
-        this.leaflet.on('tileunload', function (event) {
-            self.emit('tileunload', event);
-        });
+        this.setOpacity = function (value) {
+            this.leaflet.setOpacity(value);
+            return this;
+        };
 
         this.show = function (res) {
             res = res || yaga.Map.activeMap;
@@ -77,6 +65,6 @@ define('yaga-wms-layer', ['yaga-core', 'EventEmitter', 'leaflet'], function Yaga
         return new WmsLayer(opts);
     };
 
-    yaga.registerExtension(WmsLayer);
+    Layer.registerLayerType(WmsLayer);
     return WmsLayer;
 });

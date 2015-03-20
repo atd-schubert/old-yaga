@@ -1,6 +1,6 @@
 /*globals define, window*/
 
-define('yaga-layer', ['yaga-core', 'yaga-tile-layer', 'yaga-hash-command', 'yaga-map'], function YagaLayer(yaga) {
+define('yaga-layer', ['yaga-core', 'yaga-hash-command', 'yaga-map'], function YagaLayer(yaga) {
     'use strict';
     var Layer;
 
@@ -15,7 +15,7 @@ define('yaga-layer', ['yaga-core', 'yaga-tile-layer', 'yaga-hash-command', 'yaga
             opts = opts || {};
             opts.layerType = opts.layerType || 'TileLayer';
 
-            var layer = yaga[opts.layerType].create(opts);
+            var layer = Layer.layerType[opts.layerType].create(opts);
 
             if (typeof opts.name === "string") {
                 Layer.layer[opts.name] = layer;
