@@ -1,0 +1,23 @@
+{
+  "name": "yaga-client",
+  "version": "0.0.0",
+  "description": "The client part of yaga",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "yaga",
+    "webmapping",
+    "jquerymobile"
+  ],
+  "author": "Arne Schubert <atd.schubert@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-requirejs": "^0.4.4"
+  },
+  "dependencies": {
+  }
+}
