@@ -52,7 +52,7 @@ var project = {
         'scripts/vendor/leaflet/leaflet.css',
         'scripts/yaga.css'
     ],
-    livereload: 12345,
+    livereload: 35729,
     port: 3000,
     localHostname: 'localhost'
 };
