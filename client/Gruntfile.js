@@ -48,8 +48,8 @@
  */
 var project = {
     css: [
-        'scripts/vendor/jquery-mobile-bower/*.css',
-        'scripts/vendor/leaflet/*.css',
+        'scripts/vendor/jquery-mobile-bower/jquery.mobile-1.4.5.css',
+        'scripts/vendor/leaflet/leaflet.css',
         'scripts/yaga.css'
     ],
     livereload: 12345,
