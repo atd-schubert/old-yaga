@@ -1,9 +1,12 @@
 /*jslint browser: true*/
 /*global require, define */
 
-define('app', [], function () {
-    // TODO: Yaga logic comes here...
-    alert('Now AMD works');
+/**
+ * @module app
+ */
+define('app', ['yaga'], function (Yaga) {
+    'use strict';
+    window.Yaga = Yaga;
 });
 
 require(['app']);
