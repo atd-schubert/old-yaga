@@ -30,5 +30,10 @@ node_modules
 # bower modules in client enviroment
 client/scripts/vendor
 
+# Files created with grunt
+client/dist
+client/debug.html
+client/helper/dist.min.js
+
 # Webstorm
 .idea

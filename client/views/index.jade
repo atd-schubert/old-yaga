@@ -1,0 +1,17 @@
+- title = title || 'YAGA - Yet Another Geo Application'
+doctype html
+html(manifest=manifest)
+    head(lang='en')
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title= title
+        - for (i=0; i<css.length; i += 1)
+            link(rel='stylesheet', href=css[i])
+        script(data-main=amdMain, src=jsSrc)
+        - if (livereload)
+            script(src='//' + livereload.host + ':' + livereload.port + '/livereload.js')
+        meta(name='apple-mobile-web-app-capable', content='yes')
+    body
+        #splash-screen(data-role='page')
+            div(data-role='content')
+                p Loading... Please wait...

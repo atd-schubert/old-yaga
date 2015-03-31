@@ -89,9 +89,9 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     open: true,
                     hostname: '*',
                     base: {
-                        path: './',
+                        path: './dist',
                         options: {
-                            index: 'dist/dist.html',
+                            index: 'index.html',
                             maxAge: 300000
                         }
                     }
@@ -104,28 +104,25 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     name: 'app',
                     baseUrl: 'scripts',
                     mainConfigFile: 'scripts/main.js',
-                    out: 'dist/dist.min.js'
+                    out: 'helper/dist.min.js'
                 }
             }
         },
         watch: {
             changeJsFiles: {
                 files: ['scripts/*.js'],
-                //tasks: ['requirejs'],
                 options: {
                     livereload: project.livereload
                 }
             },
             changeCssFiles: {
-                files: [''],
-                tasks: ['concat:css', 'cssmin'],
+                files: project.css,
                 options: {
                     livereload: project.livereload
                 }
             },
             changeVendorFiles: {
                 files: ['scripts/vendor/**'],
-                //tasks: ['requirejs', 'concat:css', 'cssmin'],
                 options: {
                     livereload: project.livereload
                 }
@@ -138,15 +135,6 @@ module.exports = function yagaClientTaskRunner(grunt) {
                 }
             }
         },
-        concat: {
-            options: {
-                separator: ' '
-            },
-            css: {
-                src: project.cssFileOrder,
-                dest: 'scripts/dist.css'
-            }
-        },
         cssmin: {
             options: {
                 shorthandCompacting: false,
@@ -154,7 +142,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
             },
             dist: {
                 files: {
-                    'scripts/dist.min.css': project.cssFileOrder
+                    'dist/yaga.min.css': project.css
                 }
             }
         },
@@ -173,7 +161,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
             }
         },
         clean: {
-            dist: ['dist'],
+            dist: ['dist', 'helper'],
             bower: ['scripts/vendor'],
             debug: ['debug.html']
         },
@@ -197,21 +185,22 @@ module.exports = function yagaClientTaskRunner(grunt) {
             dist: {
                 options: {
                     data: {
+                        css: ['yaga.min.css'],
                         livereload: false,
-                        manifest: 'dist.appcache',
-                        jsSrc: 'scripts/dist.min.js'
+                        manifest: 'yaga.appcache',
+                        jsSrc: 'yaga.min.js'
                     }
                 },
                 files: {
-                    'dist.html': 'views/index.jade'
+                    'dist/index.html': 'views/index.jade'
                 }
             }
         },
         manifest: {
             dist: {
                 options: {
-                    //basePath: '../',
-                    cache: ['scripts/dist.min.js', 'scripts/dist.min.css'],
+                    basePath: './dist',
+                    cache: ['yaga.min.js', 'yaga.min.css'],
                     network: [],
                     fallback: [],
                     exclude: [],
@@ -219,17 +208,13 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     verbose: true,
                     timestamp: false,
                     hash: true,
-                    master: ['dist.html'],
-                    process: function(path) {
+                    master: ['index.html'],
+                    process: function (path) {
                         return path.substring('build/'.length);
                     }
                 },
-                src: [
-                    'dist.html',
-                    'scripts/dist.min.js',
-                    'scripts/dist.min.css'
-                ],
-                dest: 'dist.appcache'
+                src: [],
+                dest: 'dist/yaga.appcache'
             },
             debug: {
                 options: {
@@ -253,6 +238,16 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     'scripts/dist.min.css'
                 ],
                 dest: 'debug.appcache'
+            }
+        },
+        uglify: {
+            dist: {
+                options: {
+                    //sourceMap: true
+                },
+                files: {
+                    'dist/yaga.min.js': ['scripts/vendor/requirejs/require.js', 'helper/dist.min.js']
+                }
             }
         }
     });
@@ -280,13 +275,6 @@ module.exports = function yagaClientTaskRunner(grunt) {
      * @requires grunt-contrib-watch/tasks/watch.js
      */
     grunt.loadNpmTasks('grunt-contrib-watch');
-
-    /**
-     * Task for concat files
-     * @link https://github.com/gruntjs/grunt-contrib-concat - Github
-     * @requires grunt-contrib-concat/tasks/concat.js
-     */
-    grunt.loadNpmTasks('grunt-contrib-concat');
 
     /**
      * Task for minifying css files
@@ -317,13 +305,22 @@ module.exports = function yagaClientTaskRunner(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jade');
 
     /**
+     * Task to minify js files
+     * @link https://github.com/gruntjs/grunt-contrib-uglify - Github
+     * @requires grunt-contrib-uglify/tasks/uglify.js
+     */
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    /**
      * Task to generate manifest files
      * @link https://github.com/gunta/grunt-manifest - Github
      * @requires grunt-manifest/tasks/manifest.js
      */
     grunt.loadNpmTasks('grunt-manifest');
 
-    grunt.registerTask('dist', ['jade:dist', 'requirejs', 'cssmin', 'connect:dist']);
+    grunt.registerTask('dist', ['jade:dist', 'requirejs', 'cssmin', 'uglify:dist', 'manifest:dist', 'connect:dist']);
+    grunt.registerTask('debug', ['jade:debug', 'connect:debug', 'watch']);
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('default', ['jade:debug', 'concat:css', 'connect:debug', 'watch']);
+
+    grunt.registerTask('default', ['init', 'debug']);
 };
