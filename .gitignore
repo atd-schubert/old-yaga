@@ -34,6 +34,8 @@ client/scripts/vendor
 client/dist
 client/debug.html
 client/helper/dist.min.js
+client/test/index.html
+client/test/tests.js
 
 # Webstorm
 .idea
