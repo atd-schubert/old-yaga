@@ -8,5 +8,8 @@
     "leaflet": null,
     "jquery-mobile-bower": null,
     "mootools": null
+  },
+  "devDependencies": {
+    "mocha": "~2.2.1"
   }
 }

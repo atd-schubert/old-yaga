@@ -22,6 +22,21 @@
  */
 
 /**
+ * Function for listing files
+ * @link https://www.npmjs.com/package/glob - NPM
+ * @requires glob
+ * @type {exports}
+ */
+var glob = require('glob');
+
+/**
+ * Node filesystem library
+ * @type {exports}
+ * @requires fs
+ */
+var fs = require('fs');
+
+/**
  * Grunt module
  * @name grunt
  * @link http://gruntjs.com/api/grunt - Grunt API Documentation
@@ -82,6 +97,21 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     }
                 }
             },
+            test: {
+                options: {
+                    keepalive: false,
+                    port: project.port,
+                    open: true,
+                    hostname: '*',
+                    base: {
+                        path: './',
+                        options: {
+                            index: 'test/index.html',
+                            maxAge: 300000
+                        }
+                    }
+                }
+            },
             dist: {
                 options: {
                     keepalive: true,
@@ -111,6 +141,13 @@ module.exports = function yagaClientTaskRunner(grunt) {
         watch: {
             changeJsFiles: {
                 files: ['scripts/*.js'],
+                options: {
+                    livereload: project.livereload
+                }
+            },
+            changeTests: {
+                files: ['test/*.js', '!test/tests.js'],
+                tasks: ['createTests'],
                 options: {
                     livereload: project.livereload
                 }
@@ -161,6 +198,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
             }
         },
         clean: {
+            tests: ['test/tests.js', 'test/index.html'],
             dist: ['dist', 'helper'],
             bower: ['scripts/vendor'],
             debug: ['debug.html']
@@ -180,6 +218,22 @@ module.exports = function yagaClientTaskRunner(grunt) {
                 },
                 files: {
                     'debug.html': 'views/index.jade'
+                }
+            },
+            test: {
+                options: {
+                    data: {
+                        css: ['scripts/vendor/mocha/mocha.css'],
+                        livereload: {
+                            port: project.livereload,
+                            host: project.localHostname
+                        },
+                        jsSrc: 'scripts/vendor/requirejs/require.js',
+                        amdMain: 'test/main.js'
+                    }
+                },
+                files: {
+                    'test/index.html': 'test/test.jade'
                 }
             },
             dist: {
@@ -318,8 +372,35 @@ module.exports = function yagaClientTaskRunner(grunt) {
      */
     grunt.loadNpmTasks('grunt-manifest');
 
+    grunt.registerTask('createTests', 'Task to create a working test suite', function () {
+        var done, doc, reqStr, tests;
+        done = this.async();
+        doc = fs.readFileSync('test/tests.js.template').toString();
+        reqStr = ", '../";
+        tests = [];
+        glob('test/*.js', function (err, files) {
+            var i;
+            if (err) {
+                return done(err);
+            }
+            for (i = 0; i < files.length; i += 1) {
+                if (files[i] !== 'test/main.js' && files[i] !== 'test/tests.js') {
+                    tests.push(files[i].substr(0, files[i].length - 3));
+                }
+                console.log(files[i]);
+            }
+            reqStr += tests.join("', '../");
+            reqStr += "'";
+            doc = doc.split('/*** Modules here ***/').join(reqStr);
+            fs.writeFileSync('test/tests.js', doc);
+            return done();
+        });
+    });
+
     grunt.registerTask('dist', ['jade:dist', 'requirejs', 'cssmin', 'uglify:dist', 'manifest:dist', 'connect:dist']);
     grunt.registerTask('debug', ['jade:debug', 'connect:debug', 'watch']);
+    grunt.registerTask('develop', ['jade:debug', 'connect:debug', 'watch']);
+    grunt.registerTask('test', ['jade:test', 'createTests', 'connect:test', 'watch']);
     grunt.registerTask('init', ['bower']);
 
     grunt.registerTask('default', ['init', 'debug']);

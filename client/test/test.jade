@@ -1,0 +1,11 @@
+html
+    head
+        meta(charset='utf-8')
+        title Mocha Tests
+        - for (i=0; i<css.length; i += 1)
+            link(rel='stylesheet', href=css[i])
+        - if (livereload)
+            script(src='//' + livereload.host + ':' + livereload.port + '/livereload.js')
+    body
+        #mocha
+        script(data-main=amdMain, src=jsSrc)

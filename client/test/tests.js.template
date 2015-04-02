@@ -1,0 +1,23 @@
+/*jslint browser: true*/
+/*global define, mocha, console */
+define('../test/tests', ['mocha'/*** Modules here ***/], function () {
+    'use strict';
+
+    mocha.setup('bdd'); // important! is not required here for usability reasons but have to in main.js!
+
+    var i, n, cbFn, argLength;
+    argLength = arguments.length;
+    n = 1;
+    cbFn = function (err) {
+        if (err) {
+            console.error(err);
+        }
+        n += 1;
+        if (n === argLength) {
+            mocha.run();
+        }
+    };
+    for (i = 1; i < arguments.length; i += 1) {
+        arguments[i](cbFn);
+    }
+});
