@@ -2,6 +2,36 @@
 /*global define, Class*/
 
 /**
+ * EventEmitter for Javascript
+ * @name EventEmitter
+ * @property {function} $caller
+ * @property {function} caller
+ * @property {function} initialize
+ * @property {function} $constructor
+ * @property {{}} parent
+ * @property {function} getListeners
+ * @property {function} flattenListeners
+ * @property {function} getListenersAsObject
+ * @property {function} addListener
+ * @property {function} on
+ * @property {function} addOnceListener
+ * @property {function} once
+ * @property {function} defineEvent
+ * @property {function} defineEvents
+ * @property {function} removeListener
+ * @property {function} off
+ * @property {function} addListeners
+ * @property {function} removeListeners
+ * @property {function} manipulateListeners
+ * @property {function} removeEvent
+ * @property {function} removeAllListeners
+ * @property {function} emitEvent
+ * @property {function} trigger
+ * @property {function} emit
+ * @property {function} setOnceReturnValue
+ */
+
+/**
  * Basic Yaga object
  *
  * @module yaga
@@ -12,7 +42,7 @@ define('yaga', ['EventEmitter', 'mootools'], function (EventEmitter) {
     var Yaga;
 
     /**
-     *
+     * Basic Yaga Object with EventEmitter support
      * @alias yaga
      * @name Yaga
      * @constructor
@@ -46,6 +76,7 @@ define('yaga', ['EventEmitter', 'mootools'], function (EventEmitter) {
                 obj[hash] = original[hash];
             }
         }
+        return obj;
     };
     /**
      * Instantiate Yaga object by function
