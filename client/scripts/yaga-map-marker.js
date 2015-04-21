@@ -92,6 +92,18 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         getIcon: function () {
             return this.icon;
         },
+        bindPopup: function (popup) {
+            this.emit('bindPopup', popup);
+            this.leaflet.bindPopup(popup.leaflet);
+            return this;
+        },
+        bindPanel: function (panel) {
+            this.emit('bindPanel', panel);
+            this.leaflet.on('click', function () {
+                panel.open();
+            });
+            return this;
+        },
         leaflet: null,
         icon: null,
         initialize: function (opts) {
@@ -110,17 +122,16 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         opts.lng = opts.lng || 0;
 
         if (Icon.isPrototypeOf(opts.icon)) {
-            this.icon = icon;
+            this.icon = opts.icon;
         } else {
             this.icon = Icon.create(opts.icon);
         }
         opts.icon = this.icon.leaflet;
 
-        console.log(opts.icon, 'asdasd');
-
         Yaga.init.call(this, opts);
 
         this.leaflet = L.marker([opts.lat, opts.lng], opts);
+        //this.leaflet.setIcon()
     };
     /**
      * Assume a leaflet marker and make a Yaga-Object from it

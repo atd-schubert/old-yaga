@@ -195,16 +195,19 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
     MapIcon.init = function (opts) {
         opts = opts || {};
 
-        opts.options = opts.options || {};
+        opts.dir = opts.dir || 'icons/default/';
+
+        opts.iconUrl = opts.iconUrl  || opts.dir + 'icon.png';
+        opts.iconRetinaUrl = opts.iconRetinaUrl  || opts.dir + 'icon@2x.png';
+        opts.iconSize = opts.iconSize  || [25, 41];
+        opts.iconAnchor = opts.iconAnchor  || [12, 41];
+        opts.popupAnchor = opts.popupAnchor  || [1, -34];
+        opts.shadowUrl = opts.shadowUrl  || opts.dir + 'shadow.png';
+        opts.shadowRetinaUrl = opts.shadowRetinaUrl  || opts.dir + 'shadow@2x.png';
+        opts.shadowSize = opts.shadowSize  || [41, 41];
+        opts.shadowAnchor = opts.shadowAnchor  || [12, 41];
 
         Yaga.init.call(this, opts);
-
-        if (opts.shadowUrl) {
-            this.setShadowUrl(opts.shadowUrl);
-        }
-        if (opts.shadowUrl) {
-            this.setShadowUrl(opts.shadowUrl);
-        }
 
         this.leaflet = L.icon(opts);
         this.leaflet.yagaElement = this;
