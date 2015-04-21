@@ -83,7 +83,9 @@ define('yaga-map', ['yaga-ui', 'jquery', 'leaflet'], function (UI, $, L) {
 
         $(window.document).on('DOMNodeInserted', this.domRoot, function (event) {
             if (event.target === self.domRoot) {
-                self.leaflet.invalidateSize();
+                window.setTimeout(function () {
+                    self.leaflet.invalidateSize();
+                }, 1);
             }
         });
 
