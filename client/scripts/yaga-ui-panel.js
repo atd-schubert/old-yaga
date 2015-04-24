@@ -1,7 +1,7 @@
 /*jslint browser: true*/
 /*globals window, define, Class*/
 
-define('yaga-ui-panel', ['yaga-ui', 'jquery', 'yaga-ui-page', 'jqueryMobile'], function (UI, $, Page) {
+define('yaga-ui-panel', ['yaga-ui', 'jquery', 'yaga-ui-page', 'yaga-ui-content', 'jqueryMobile'], function (UI, $, Page, Content) {
     'use strict';
     var Panel;
     Panel = new Class({
@@ -69,7 +69,48 @@ define('yaga-ui-panel', ['yaga-ui', 'jquery', 'yaga-ui-page', 'jqueryMobile'], f
         },
         getPersistent: function () {
             throw new Error('not implemented'); // TODO:
-        }
+        },
+        /**
+         * Set content within content object
+         * @param {Node|childNodes|NodeList|String} elem
+         * @returns {UI}
+         */
+        setContent: function setContentOfPanel(elem) {
+            this.emit('setTitle', elem);
+            this.content.setContent(elem);
+            this.emit('changed');
+            return this;
+        },
+        /**
+         * Returns the content within content object
+         * @returns {childNodes|*|NodeList}
+         */
+        getContent: function getContentOfPanel() {
+            return this.content.getContent();
+        },
+        /**
+         * Append content to the content object
+         * @param {Node|childNodes|NodeList|String} elem
+         * @returns {UI}
+         */
+        appendContent: function appendContentOfPanel(elem) {
+            this.emit('appendContent', elem);
+            this.content.appendContent(elem);
+            this.emit('changed');
+            return this;
+        },
+        /**
+         * Prepend content to the content object
+         * @param {Node|childNodes|NodeList|String} elem
+         * @returns {UI}
+         */
+        prependContent: function prependContentOfPanel(elem) {
+            this.emit('prependContent', elem);
+            this.content.prependContent(elem);
+            this.emit('changed');
+            return this;
+        },
+        content: null
     });
     Panel.init = function (opts) {
         var self, isPersistent, innerClick;
@@ -80,10 +121,13 @@ define('yaga-ui-panel', ['yaga-ui', 'jquery', 'yaga-ui-page', 'jqueryMobile'], f
         opts.position = opts.position || 'right';
         opts.display = opts.display || 'overlay';
         opts.positionFixed = opts.positionFixed || 'true';
-        opts.content = opts.content || {};
         opts.style = opts.style || 'background-color: rgba(255,255,255,0.9);'; // TODO: exclude to css
 
+        this.content = Content.create(); // Has to be created before UI.init()!
+
         UI.init.call(this, opts);
+
+        this.domRoot.appendChild(this.content.domRoot);
 
         opts.domRoot.setAttribute('data-role', 'panel');
         this.domRoot.setAttribute('data-persistent', 'true');
@@ -110,9 +154,10 @@ define('yaga-ui-panel', ['yaga-ui', 'jquery', 'yaga-ui-page', 'jqueryMobile'], f
         if (opts.persistent) {
             this.setPersistent(opts.persistent);
         }
+        /* is already in yaga-ui
         if (opts.content) {
             this.setContent(opts.content);
-        }
+        }*/
 
         this.$domRoot.panel().enhanceWithin();//('create');
 
@@ -127,6 +172,26 @@ define('yaga-ui-panel', ['yaga-ui', 'jquery', 'yaga-ui-page', 'jqueryMobile'], f
         });
 
         window.document.body.appendChild(this.domRoot);
+    };
+    Panel.assume = function (domRoot) {
+        var opts = {};
+        if (domRoot.hasAttribute('data-position')) {
+            opts.position = domRoot.getAttribute('data-position');
+        }
+        if (domRoot.hasAttribute('data-display')) {
+            opts.display = domRoot.getAttribute('data-display');
+        }
+        if (domRoot.hasAttribute('data-position-fixed')) {
+            opts.positionFixed = domRoot.getAttribute('data-position-fixed');
+        }
+        if (domRoot.hasAttribute('data-persistent')) {
+            opts.persistent = domRoot.getAttribute('data-persistent');
+        }
+        if (domRoot.hasAttribute('style')) {
+            opts.style = domRoot.getAttribute('style');
+        }
+        opts.domRoot = domRoot;
+        return Panel.create(opts);
     };
     Panel.create = function (opts) {
         return new Panel(opts);
