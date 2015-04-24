@@ -82,11 +82,7 @@ define('yaga-map', ['yaga-ui', 'jquery', 'leaflet'], function (UI, $, L) {
         this.domRoot.setAttribute('style', opts.style); // overwrite leaflet inline-css
 
         $(window.document).on('DOMNodeInserted', this.domRoot, function (event) {
-            if (event.target === self.domRoot) {
-                window.setTimeout(function () {
-                    self.leaflet.invalidateSize();
-                }, 1);
-            }
+            self.leaflet.invalidateSize();
         });
 
         /*this.leaflet.on('focus', function () {
