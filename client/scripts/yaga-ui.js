@@ -93,7 +93,7 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
          * @returns {UI}
          */
         setContent: function setContentOfUIElement(elem) {
-            this.emit('setTitle', elem);
+            this.emit('setContent', elem);
             this.$domRoot.html('');
             this.$domRoot.append(elem);
             this.emit('changed');
