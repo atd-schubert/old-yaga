@@ -4,7 +4,7 @@
 /**
  * @module yaga-geo-json
  */
-define('yaga-geo-json', ['yaga-layer', 'leaflet'], function (Layer, L) {
+define('yaga-geo-json', ['yaga-layer', 'leaflet', 'yaga-map-marker'], function (Layer, L, Marker) {
     'use strict';
     var GeoJson, Feature;
 
@@ -50,6 +50,10 @@ define('yaga-geo-json', ['yaga-layer', 'leaflet'], function (Layer, L) {
         toGeoJSON: function () {
             return this.leaflet.toGeoJSON();
         },
+        addData: function (geojson) {
+            this.leaflet.addData(geojson);
+            return this;
+        },
         features: []
     });
     GeoJson.init = function (opts) {
@@ -61,13 +65,19 @@ define('yaga-geo-json', ['yaga-layer', 'leaflet'], function (Layer, L) {
 
         createOpts = {
             onEachFeature: function (feature, layer) {
-                self.emit('createFeature', {leaflet: layer, geoJson: feature, parent: self});
-                self.features.push(Feature.create({leaflet: layer, geoJson: feature, parent: self}));
+                var tmpFeature = Feature.create({leaflet: layer, geoJson: feature, parent: self});
+                self.emit('createFeature', {leaflet: layer, geoJson: feature, parent: self, feature: tmpFeature});
+                self.features.push(tmpFeature);
                 self.emit('changed');
+            },
+            pointToLayer: function (feature, latlng) {
+                var tmpMarker = Marker.create({lat: latlng.lat, lng: latlng.lng});
+                self.emit('createMarker', {marker: tmpMarker, feature: feature, latlng: latlng});
+                return tmpMarker.leaflet;
             }
         };
 
-        this.leaflet = opts.leaflet || L.geoJson(opts, createOpts);
+        this.leaflet = opts.leaflet || L.geoJson(null, createOpts);
 
         // Hacks
         this.leaflet.getAttribution = function () {
@@ -94,7 +104,6 @@ define('yaga-geo-json', ['yaga-layer', 'leaflet'], function (Layer, L) {
         this.setOpacity = function (value) {
             this.emit('setOpacity', value);
             opacity = value;
-            this.leaflet.setOpacity(opacity);
             throw new Error('not implemented'); // TODO:
             return this;
         };
@@ -107,9 +116,14 @@ define('yaga-geo-json', ['yaga-layer', 'leaflet'], function (Layer, L) {
         if (opts.zIndex) {
             this.setZIndex(opts.zIndex);
         }
+        if (opts.data) {
+            this.addData(opts.data);
+        }
     };
-    GeoJson.assume = function (geojson) {
-        GeoJson.create(geojson);
+    GeoJson.assume = function (leafletGeoJson) { // TODO: not working!
+        var rg = GeoJson.create();
+        rg.leaflet = leafletGeoJson;
+        return rg;
     };
     GeoJson.create = function (opts) {
         return new GeoJson(opts);
