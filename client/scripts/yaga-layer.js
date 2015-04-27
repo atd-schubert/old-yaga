@@ -4,7 +4,7 @@
 /**
  * @module yaga-layer
  */
-define('yaga-layer', ['yaga'], function (Yaga) {
+define('yaga-layer', ['yaga', 'yaga-map'], function (Yaga, Map) {
     'use strict';
     var Layer;
 
