@@ -4,54 +4,52 @@
 /**
  * @module app
  */
-define('app', ['yaga', 'jquery', 'yaga-map', 'yaga-map-popup', 'yaga-ui-page', 'yaga-storage', 'yaga-storage-local', 'yaga-geo-json', 'yaga-layer-tile', 'yaga-ui-panel', 'yaga-map-marker', 'yaga-ui-splash-screen', 'yaga-map-icon'], function (Yaga, $, Map, Popup, Page, storage, ls, gj, tile, Panel, Marker, sc, Icon) {
+define('app', ['yaga', 'jquery', 'yaga-map', 'yaga-map-popup', 'yaga-ui-page', 'yaga-storage', 'yaga-storage-local', 'yaga-geo-json', 'yaga-layer-tile', 'yaga-ui-panel', 'yaga-map-marker', 'yaga-ui-splash-screen', 'yaga-map-icon'], function (Yaga, $, Map, Popup, Page, Storage, ls, GeoJson, Tile, Panel, Marker, SplashScreen, Icon) {
     'use strict';
-    window.Yaga = Yaga;
-    window.Map = Map;
-    window.Popup = Popup;
-    window.Page = Page;
-    window.Store = storage;
-    window.ls = ls;
-    window.gj = gj;
-    window.tile = tile;
-    window.Panel = Panel;
-    window.Marker = Marker;
-    window.Icon = Icon;
-    window.sc = sc;
-    sc.create();
+    var app, map, page, osm, state, marker, panel, point;
+    app = {};
 
+    app.splashScreen = SplashScreen.create();
+    app.map = {
+        main: Map.create().activate()
+    };
+    app.layer = {
+        osm: Tile.create().show()
+    };
+    app.panel = {
+        drachenfels: Panel.create({content: 'Das ist der Drachenfels...'})
+    };
+    app.marker = {
+        drachenfels: Marker.create({lat: 50.6650948, lng: 7.2102715}).bindPanel(app.panel.drachenfels).show()
+    };
+    app.area = {
+        state: GeoJson.create({
+            "type": "Feature",
+            "properties": {"party": "Republican"},
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-104.05, 48.99],
+                    [-97.22,  48.98],
+                    [-96.58,  45.94],
+                    [-104.03, 45.94],
+                    [-104.05, 48.99]
+                ]]
+            }
+        }).show()
+    };
 
+    //Marker.create({lat: 50, lng: 7, icon: {dir: 'icons/gray/'}}).show();
+    //Marker.create({lat: 51, lng: 8, icon: marker.icon}).show();
 
-    var map, page, osm, state;
-    map = Map.create();
-    map.activate();
+    app.page = {
+        main: Page.create({content: {content: app.map.main.domRoot}, title: 'YAGA - Yet another geo application'})
+    };
 
-    osm = tile.create();
-    osm.show();
-
-    state = gj.create({
-        "type": "Feature",
-        "properties": {"party": "Republican"},
-        "geometry": {
-            "type": "Polygon",
-            "coordinates": [[
-                [-104.05, 48.99],
-                [-97.22,  48.98],
-                [-96.58,  45.94],
-                [-104.03, 45.94],
-                [-104.05, 48.99]
-            ]]
-        }
-    });
-
-    state.show();
-
-    page = Page.create({content: {content: map.domRoot}, title: 'YAGA - Yet another geo application'});
-
-    window.document.body.appendChild(page.domRoot);
     $(window.document).ready(function () {
-        page.open();
+        app.page.main.open();
     });
+    window.app = app;
 });
 
 require(['app']);
