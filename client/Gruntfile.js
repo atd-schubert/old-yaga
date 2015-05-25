@@ -69,7 +69,7 @@ var project = {
     ],
     livereload: 35729,
     port: 3000,
-    localHostname: 'localhost'
+    localHostname: 'localhost' // '0.0.0.0'
 };
 
 /**
@@ -87,7 +87,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     keepalive: false,
                     port: project.port,
                     open: true,
-                    hostname: '*',
+                    hostname: project.hostname,
                     base: {
                         path: './',
                         options: {
@@ -102,7 +102,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     keepalive: false,
                     port: project.port,
                     open: true,
-                    hostname: '*',
+                    hostname: project.hostname,
                     base: {
                         path: './',
                         options: {
@@ -117,7 +117,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     keepalive: true,
                     port: project.port,
                     open: true,
-                    hostname: '*',
+                    hostname: project.hostname,
                     base: {
                         path: './dist',
                         options: {
