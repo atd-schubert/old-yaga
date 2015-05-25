@@ -25,6 +25,23 @@ define('yaga-ui-header-bar', ['yaga-ui', 'jquery', 'jqueryMobile'], function (UI
         getFullscreen: function () {
             return this.domRoot.hasAttribute('data-fullscreen') && this.domRoot.getAttribute('data-fullscreen') === 'true';
         },
+        activateTapToggle: function () {
+            this.$domRoot.attr('data-tap-toggle', 'true');
+            return this;
+        },
+        deactivateTapToggle: function () {
+            this.$domRoot.attr('data-tap-toggle', 'false');
+            return this;
+        },
+        setTapToggle: function (bool) {
+            if (bool) {
+                return this.activateTapToggle();
+            }
+            return this.deactivateTapToggle();
+        },
+        getTapToggle: function () {
+            return this.$domRoot.attr('data-tap-toggle').toLowerCase() === 'false';
+        },
         setFixed: function (bool) {
             this.emit('setFixed', bool);
             if (bool) {

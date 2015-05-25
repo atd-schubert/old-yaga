@@ -18,8 +18,8 @@ define('yaga-ui-content', ['yaga-ui', 'jqueryMobile'], function (UI) {
         opts.domRoot.setAttribute('data-role', 'content');
     };
     Content.assume = function (domRoot) {
-        if (Content.isPrototypeOf(domRoot.yagaElement)) {
-            return domRoot.yagaElement;
+        if (typeof domRoot.getYagaElement === 'function' && Content.isPrototypeOf(domRoot.getYagaElement())) {
+            return domRoot.getYagaElement();
         }
         return Content.create({domRoot: domRoot});
     };

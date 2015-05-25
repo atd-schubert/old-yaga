@@ -8,6 +8,9 @@ define('yaga-ui-splash-screen', ['yaga-ui', 'yaga-ui-page'], function (UI, Page)
         Extends: Page,
         initialize: function (opts) {
             SplashScreen.init.call(this, opts);
+        },
+        hide: function () {
+            this.$domRoot.hide();
         }
     });
     SplashScreen.init = function YagaSplashScreen(opts) {

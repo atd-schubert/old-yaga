@@ -3,7 +3,7 @@
 
 /**
  * EventEmitter for Javascript
- * @class EventEmitter
+ * @name EventEmitter
  * @property {function} $caller
  * @property {function} caller
  * @property {function} initialize
@@ -32,23 +32,10 @@
  */
 
 /**
- * Listen for events
- * @memberOf EventEmitter#
- * @method on
- * @param {string} eventName - Name of the event to listen for
- * @param {function} fn - Event callback function
- * @returns {self}
+ * Basic Yaga object
+ *
+ * @module yaga
  */
-
-/**
- * Listen for events only one time
- * @memberOf EventEmitter#
- * @method once
- * @param {string} eventName - Name of the event to listen for
- * @param {function} fn - Event callback function
- * @returns {self}
- */
-
 define('yaga', ['EventEmitter', 'mootools'], function (EventEmitter) {
     'use strict';
 
@@ -60,6 +47,7 @@ define('yaga', ['EventEmitter', 'mootools'], function (EventEmitter) {
      * @name Yaga
      * @constructor
      * @augments EventEmitter
+     * @type {Class}
      */
     Yaga = new Class({
         Extends: EventEmitter,
@@ -101,9 +89,3 @@ define('yaga', ['EventEmitter', 'mootools'], function (EventEmitter) {
     };
     return Yaga;
 });
-
-/**
- * Basic Yaga object
- *
- * @module yaga
- */

@@ -8,28 +8,32 @@ define('yaga-layer-tile', ['yaga-layer', 'leaflet', 'yaga-map'], function (Layer
     TileLayer = new Class({
         Extends: Layer,
         getContainer: function () {
-            return this.leaflet.getContainer();
+            return this.getLeafletElement().getContainer();
         },
         redraw: function () {
             this.emit('redraw');
-            this.leaflet.redraw();
+            this.getLeafletElement().redraw();
             return this;
         },
         getUrl: function () {
-            return this.leaflet._url;
+            return this.getLeafletElement()._url;
         },
         setUrl: function (value, noRedraw) {
             this.emit('setUrl', value);
-            this.leaflet.setUrl(value, noRedraw);
+            this.getLeafletElement().setUrl(value, noRedraw);
             return this;
         },
         initialize: function (opts) {
             TileLayer.init.call(this, opts);
+        },
+        getLeafletElement: function () {
+            throw new Error('not implemented');
         }
     });
 
     TileLayer.init = function (opts) {
-        var attribution, zIndex, opacity;
+        var attribution, zIndex, opacity, self, leafletElement;
+        self = this;
         opts = opts || {
             url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             //minZoom: 1,
@@ -44,11 +48,17 @@ define('yaga-layer-tile', ['yaga-layer', 'leaflet', 'yaga-map'], function (Layer
 
         Layer.init.call(this, opts);
 
-        this.leaflet = opts.leaflet ||  new L.TileLayer(opts.url, opts);
+        leafletElement = opts.leaflet ||  new L.TileLayer(opts.url, opts);
 
-        this.leaflet.yagaElement = this;
+        this.getLeafletElement = function () {
+            return leafletElement;
+        };
 
-        this.leaflet.getAttribution = function () { // Hack to change attribution
+        leafletElement.getYagaElement = function () {
+            return self;
+        };
+
+        leafletElement.getAttribution = function () { // Hack to change attribution
             return attribution;
         };
 
@@ -67,7 +77,7 @@ define('yaga-layer-tile', ['yaga-layer', 'leaflet', 'yaga-map'], function (Layer
         this.setZIndex = function (value) {
             this.emit('setZIndex', value);
             zIndex = value;
-            this.leaflet.setZIndex(zIndex);
+            leafletElement.setZIndex(zIndex);
             return this;
         };
         this.getOpacity = function () { // Hack to set opacity
@@ -76,7 +86,7 @@ define('yaga-layer-tile', ['yaga-layer', 'leaflet', 'yaga-map'], function (Layer
         this.setOpacity = function (value) {
             this.emit('setOpacity', value);
             opacity = value;
-            this.leaflet.setOpacity(opacity);
+            leafletElement.setOpacity(opacity);
             return this;
         };
         if (opts.attribution) {

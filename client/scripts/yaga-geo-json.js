@@ -2,99 +2,78 @@
 /*globals window, define, Class*/
 
 /**
- * GeoJSON data like described here: http://geojson.org/
- * @name geojson
- * @type {{}}
+ * @module yaga-geo-json
  */
-
-
-define('yaga-geo-json', ['yaga-layer', 'leaflet', 'yaga-map-marker'], function (YagaLayer, L, Marker) {
+define('yaga-geo-json', ['yaga-layer', 'leaflet', 'yaga-map-marker'], function (Layer, L, Marker) {
     'use strict';
-    var YagaGeoJson, YagaGeoJsonFeature;
+    var GeoJson, Feature;
 
     /**
-     * Yaga elenemt for features in geoJSON
+     * @name Feature
      * @constructor
-     * @name YagaGeoJsonFeature
+     * @type {Class}
      */
-    YagaGeoJsonFeature = new Class({
-        Extends: YagaLayer,
+    Feature = new Class({
+        Extends: Layer,
         initialize: function (opts) {
-            YagaGeoJsonFeature.init.call(this, opts);
+            Feature.init.call(this, opts);
         },
-        /**
-         * @memberOf YagaGeoJsonFeature
-         * @returns {geojson}
-         */
         toGeoJson: function () {
             this.layer.toGeoJSON();
         },
         show: function (father) {
             father = father || this.parent;
-            this.leaflet.addTo(father.leaflet);
+            this.getLeafletElement().addTo(father.getLeafletElement());
         },
         hide: function (father) {
             father = father || this.parent;
-            father.leaflet.removeLayer(this.leaflet);
+            father.getLeafletElement().removeLayer(this.getLeafletElement);
         },
         geoJson: null,
-        parent: null
+        parent: null,
+        getLeafletElement: function () {
+            throw new Error('not implemented');
+        }
     });
-    YagaGeoJsonFeature.init = function (opts) {
-        YagaLayer.init.call(this, opts);
-        this.leaflet = opts.leaflet;
+    Feature.init = function (opts) {
+        Layer.init.call(this, opts);
+        this.getLeafletElement = function () {
+            return opts.leaflet;
+        };
         this.geoJson = opts.geoJson;
         this.parent = opts.parent;
     };
-    YagaGeoJsonFeature.create = function (opts) {
-        return new YagaGeoJsonFeature(opts);
+    Feature.create = function (opts) {
+        return new Feature(opts);
     };
 
-    /**
-     *
-     * @class YagaGeoJson
-     * @constructor
-     * @augments YagaLayer
-     * @alias module:yaga-geo-json
-     */
-    YagaGeoJson = new Class({
-        Extends: YagaLayer,
+    GeoJson = new Class({
+        Extends: Layer,
         initialize: function (opts) {
-            YagaGeoJson.init.call(this, opts);
+            GeoJson.init.call(this, opts);
         },
-        /**
-         * @memberOf YagaLayer#
-         * @returns {geojson}
-         */
         toGeoJSON: function () {
-            return this.leaflet.toGeoJSON();
+            return this.getLeafletElement().toGeoJSON();
         },
-        /**
-         * Add GeoJSON data to yaga-element
-         * @param {geojson} geojson - Data to add in geojson format
-         * @returns {YagaGeoJson}
-         */
         addData: function (geojson) {
-            this.leaflet.addData(geojson);
+            this.getLeafletElement().addData(geojson);
             return this;
         },
-        features: []
+        features: [],
+        getLeafletElement: function () {
+            throw new Error('not implemented');
+        }
     });
-    /**
-     *
-     * @param {{}} [opts]
-     * @param {string} [opts.attribution] - Attribution of layer
-     */
-    YagaGeoJson.init = function (opts) {
-        var attribution, zIndex, opacity, createOpts, self;
+    GeoJson.init = function (opts) {
+        var attribution, zIndex, opacity, createOpts, self, leafletElement;
         opts = opts || {};
         self = this;
 
-        YagaLayer.init.call(this, opts);
+        Layer.init.call(this, opts);
 
         createOpts = {
             onEachFeature: function (feature, layer) {
-                var tmpFeature = YagaGeoJsonFeature.create({leaflet: layer, geoJson: feature, parent: self});
+                var tmpFeature = Feature.create({leaflet: layer, geoJson: feature, parent: self});
                 self.emit('createFeature', {leaflet: layer, geoJson: feature, parent: self, feature: tmpFeature});
                 self.features.push(tmpFeature);
                 self.emit('changed');
@@ -102,14 +81,18 @@ define('yaga-geo-json', ['yaga-layer', 'leaflet', 'yaga-map-marker'], function (
             pointToLayer: function (feature, latlng) {
                 var tmpMarker = Marker.create({lat: latlng.lat, lng: latlng.lng});
                 self.emit('createMarker', {marker: tmpMarker, feature: feature, latlng: latlng});
-                return tmpMarker.leaflet;
+                return tmpMarker.getLeafletElement();
             }
         };
 
-        this.leaflet = opts.leaflet || L.geoJson(null, createOpts);
+        leafletElement = (opts.getLeafletElement === 'function' && opts.getLeafletElement()) || L.geoJson(null, createOpts);
+
+        this.getLeafletElement = function () {
+            return leafletElement;
+        };
 
         // Hacks
-        this.leaflet.getAttribution = function () {
+        leafletElement.getAttribution = function () {
             return attribution;
         };
         this.getAttribution = function () { // Hack to change attribution
@@ -149,24 +132,20 @@ define('yaga-geo-json', ['yaga-layer', 'leaflet', 'yaga-map-marker'], function (
             this.addData(opts.data);
         }
     };
-    YagaGeoJson.assume = function (leafletGeoJson) { // TODO: not working!
-        var rg = YagaGeoJson.create();
-        rg.leaflet = leafletGeoJson;
+    GeoJson.assume = function (leafletGeoJson) { // TODO: not working!
+        var rg = GeoJson.create();
+        rg.getLeafletElement = function () {
+            return leafletGeoJson;
+        };
         return rg;
     };
-    YagaGeoJson.create = function (opts) {
-        return new YagaGeoJson(opts);
+    GeoJson.create = function (opts) {
+        return new GeoJson(opts);
     };
-    YagaGeoJson.Feature = Feature;
-    YagaLayer.registerType('geojson', YagaGeoJson);
-    YagaLayer.registerType('Feature', YagaGeoJson);
-    YagaLayer.registerType('FeatureCollection', YagaGeoJson);
+    GeoJson.Feature = Feature;
+    Layer.registerType('geojson', GeoJson);
+    Layer.registerType('Feature', GeoJson);
+    Layer.registerType('FeatureCollection', GeoJson);
 
-    return YagaGeoJson;
+    return GeoJson;
 });
-
-/**
- *
- * @module yaga-geo-json
- * @returns YagaGeoJson
- */

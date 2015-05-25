@@ -15,7 +15,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setClassName: function setIconClassName(value) {
             this.emit('setClassName', value);
-            this.leaflet.className = value;
+            this.getLeafletElement().className = value;
             this.emit('changed');
             return this;
         },
@@ -24,7 +24,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getClassName: function getIconClassName() {
-            return this.leaflet.options.className;
+            return this.getLeafletElement().options.className;
         },
         /**
          * Set anchor
@@ -33,7 +33,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setAnchor: function setIconAnchor(value) {
             this.emit('setAnchor', value);
-            this.leaflet.iconAnchor = value;
+            this.getLeafletElement().iconAnchor = value;
             this.emit('changed');
             return this;
         },
@@ -42,7 +42,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.iconAnchor|*|o.Icon.Default.options.iconAnchor|number[]}
          */
         getAnchor: function getIconAnchor() {
-            return this.leaflet.options.iconAnchor;
+            return this.getLeafletElement().options.iconAnchor;
         },
         /**
          * Set retina URL
@@ -51,7 +51,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setRetinaUrl: function setIconRetinaUrl(value) {
             this.emit('setRetinaUrl', value);
-            this.leaflet.iconRetinaUrl = value;
+            this.getLeafletElement().iconRetinaUrl = value;
             this.emit('changed');
             return this;
         },
@@ -60,7 +60,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getRetinaUrl: function getIconRetinaUrl() {
-            return this.leaflet.options.iconRetinaUrl;
+            return this.getLeafletElement().options.iconRetinaUrl;
         },
         /**
          * Set display size of icon
@@ -69,7 +69,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setSize: function setIconSize(value) {
             this.emit('setSize', value);
-            this.leaflet.iconSize = value;
+            this.getLeafletElement().iconSize = value;
             this.emit('changed');
             return this;
         },
@@ -78,7 +78,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.iconSize|*|L.DivIcon.options.iconSize|o.DivIcon.options.iconSize|o.Icon.Default.options.iconSize}
          */
         getSize: function getIconSize() {
-            return this.leaflet.options.iconSize;
+            return this.getLeafletElement().options.iconSize;
         },
         /**
          * Set URL of icon
@@ -87,7 +87,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setUrl: function setIconUrl(value) {
             this.emit('setUrl', value);
-            this.leaflet.iconUrl = value;
+            this.getLeafletElement().iconUrl = value;
             this.emit('changed');
             return this;
         },
@@ -96,7 +96,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string|*}
          */
         getUrl: function getIconUrl() {
-            return this.leaflet.options.iconUrl;
+            return this.getLeafletElement().options.iconUrl;
         },
         /**
          * Set anchor position for popups
@@ -105,7 +105,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setPopupAnchor: function setIconPopupAnchor(value) {
             this.emit('setPopupAnchor', value);
-            this.leaflet.popupAnchor = value;
+            this.getLeafletElement().popupAnchor = value;
             this.emit('changed');
             return this;
         },
@@ -114,7 +114,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.popupAnchor|*|o.Icon.Default.options.popupAnchor}
          */
         getPopupAnchor: function getIconPopupAnchor() {
-            return this.leaflet.options.popupAnchor;
+            return this.getLeafletElement().options.popupAnchor;
         },
         /**
          * Set anchor position of the shadow
@@ -123,7 +123,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowAnchor: function getIconPopupAnchor(value) {
             this.emit('setShadowAnchor', value);
-            this.leaflet.shadowAnchor = value;
+            this.getLeafletElement().shadowAnchor = value;
             this.emit('changed');
             return this;
         },
@@ -132,7 +132,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.iconAnchor|*|o.Icon.Default.options.iconAnchor|number[]}
          */
         getShadowAnchor: function getIconShadowAnchor() {
-            return this.leaflet.options.shadowAnchor;
+            return this.getLeafletElement().options.shadowAnchor;
         },
         /**
          * Set shadow URL for retina devices
@@ -141,7 +141,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowRetinaUrl: function setIconShadowRetinaUrl(value) {
             this.emit('setShadowRetinaUrl', value);
-            this.leaflet.shadowRetinaUrl = value;
+            this.getLeafletElement().shadowRetinaUrl = value;
             this.emit('changed');
             return this;
         },
@@ -150,7 +150,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getShadowRetinaUrl: function getIconShadowRetinaUrl() {
-            return this.leaflet.options.shadowRetinaUrl;
+            return this.getLeafletElement().options.shadowRetinaUrl;
         },
         /**
          * Set size of shadow
@@ -159,7 +159,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowSize: function getIconShadowRetinaUrl(value) {
             this.emit('setShadowSize', value);
-            this.leaflet.shadowSize = value;
+            this.getLeafletElement().shadowSize = value;
             this.emit('changed');
             return this;
         },
@@ -168,7 +168,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.shadowSize|*|o.Icon.Default.options.shadowSize}
          */
         getShadowSize: function getIconShadowSize() {
-            return this.leaflet.options.shadowSize;
+            return this.getLeafletElement().options.shadowSize;
         },
         /**
          * Set shadow URL
@@ -177,7 +177,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowUrl: function setIconShadowUrl(value) {
             this.emit('setShadowUrl', value);
-            this.leaflet.shadowUrl = value;
+            this.getLeafletElement().shadowUrl = value;
             this.emit('changed');
             return this;
         },
@@ -186,13 +186,17 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getShadowUrl: function getIconShadowUrl() {
-            return this.leaflet.options.shadowUrl;
+            return this.getLeafletElement().options.shadowUrl;
         },
         initialize: function initializeIcon(opts) {
             MapIcon.init.call(this, opts);
+        },
+        getLeafletElement: function () {
+            throw new Error('not implemented');
         }
     });
     MapIcon.init = function (opts) {
+        var self = this, leafletElement;
         opts = opts || {};
 
         opts.dir = opts.dir || 'icons/default/';
@@ -209,17 +213,26 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
 
         Yaga.init.call(this, opts);
 
-        this.leaflet = L.icon(opts);
-        this.leaflet.yagaElement = this;
+        leafletElement = L.icon(opts);
+        this.getLeafletElement = function () {
+            return leafletElement;
+        };
+        leafletElement.getYagaElement = function () {
+            return self;
+        };
     };
     MapIcon.assume = function (leafletIcon) {
-        if (MapIcon.prototype.isPrototypeOf(leafletIcon.yagaElement)) {
+        if (typeof leafletIcon.getYagaElement === 'function' && MapIcon.isPrototypeOf(leafletIcon.getYagaElement())) {
             return leafletIcon.yagaElement;
         }
         var obj;
         obj = MapIcon.create();
-        obj.leaflet = leafletIcon;
-        obj.leaflet.yagaElement = obj;
+        obj.getLeafletElement = function () {
+            return leafletIcon;
+        };
+        leafletIcon.getYagaElement = function () {
+            return obj;
+        };
         return obj;
     };
     MapIcon.create = function (opts) {

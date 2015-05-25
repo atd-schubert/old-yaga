@@ -36,7 +36,7 @@ define('yaga-map-popup', ['yaga-ui', 'leaflet', 'yaga-map'], function (UI, L, Ma
          */
         setLatLng: function setPopupLatLng(latlng) {
             this.emit('setLatLng', latlng);
-            this.leaflet.setLatLng(latlng);
+            this.getLeafletElement().setLatLng(latlng);
             this.emit('changed');
             return this;
         },
@@ -46,7 +46,7 @@ define('yaga-map-popup', ['yaga-ui', 'leaflet', 'yaga-map'], function (UI, L, Ma
          * @returns {LatLng}
          */
         getLatLng: function getPopupLatLng() {
-            return this.leaflet.getLatLng();
+            return this.getLeafletElement().getLatLng();
         },
         /**
          * Open the popup on active or specified map
@@ -57,7 +57,7 @@ define('yaga-map-popup', ['yaga-ui', 'leaflet', 'yaga-map'], function (UI, L, Ma
         open: function openPopup(map) {
             this.emit('open');
             map = map || Map.activeMap;
-            this.leaflet.openOn(map.leaflet);
+            this.getLeafletElement().openOn(map.getLeafletElement());
             this.emit('changed');
             return this;
         },
@@ -70,27 +70,33 @@ define('yaga-map-popup', ['yaga-ui', 'leaflet', 'yaga-map'], function (UI, L, Ma
         close: function closePopup(map) {
             this.emit('close');
             map = map || Map.activeMap;
-            map.leaflet.removeLayer(this.leaflet);
+            map.getLeafletElement().removeLayer(this.getLeafletElement());
             this.emit('changed');
             return this;
         },
-        /**
-         * @type {{}}
-         */
-        leaflet: null,
+        getLeafletElement: function () {
+            throw new Error('not implemented');
+        },
         initialize: function (opts) {
             MapPopup.init.call(this, opts);
         }
     });
     MapPopup.init = function (opts) {
+        var self = this, leafletElement;
         opts = opts || {};
         opts.latlng = opts.latlng || [0, 0];
 
         UI.init.call(this, opts);
 
-        this.leaflet = L.popup(this.domRoot, opts.leaflet);
-        this.leaflet.yagaElement = this;
-        this.leaflet.setContent(this.domRoot);
+        leafletElement = L.popup(this.domRoot, opts.leaflet);
+
+        this.getLeafletElement = function () {
+            return leafletElement;
+        };
+        leafletElement.getYagaElement = function () {
+            return self;
+        };
+        leafletElement.setContent(this.domRoot);
 
         if (opts.content) {
             this.setContent(opts.content);
@@ -102,7 +108,9 @@ define('yaga-map-popup', ['yaga-ui', 'leaflet', 'yaga-map'], function (UI, L, Ma
     MapPopup.assume = function (leafletPopup) {
         var obj;
         obj = MapPopup.create();
-        obj.leaflet = leafletPopup;
+        obj.getLeafletElement = function () {
+            return leafletPopup;
+        };
         return obj;
     };
     /**

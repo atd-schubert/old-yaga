@@ -46,12 +46,15 @@ define('yaga-map', ['yaga-ui', 'jquery', 'leaflet'], function (UI, $, L) {
         },
         getLayers: function () {
             var arr, hash, leafletLayers;
-            leafletLayers = this.leaflet._layers;
+            leafletLayers = this.getLeafletElement()._layers;
             arr = [];
             for (hash in leafletLayers) {
-                arr.push(leafletLayers[hash].yagaElement || leafletLayers[hash]); // TODO: implement assume
+                arr.push((leafletLayers[hash].getYagaElement && leafletLayers[hash].getYagaElement()) || leafletLayers[hash]); // TODO: implement assume
             }
             return arr;
+        },
+        getLeafletElement: function () {
+            throw new Error('not implemented');
         },
         initialize: function initializeMap(opts) {
             Map.init.call(this, opts);
@@ -64,7 +67,7 @@ define('yaga-map', ['yaga-ui', 'jquery', 'leaflet'], function (UI, $, L) {
      * @static
      */
     Map.init = function (opts) {
-        var self;
+        var self, leafletElement;
         self = this;
 
         opts = opts || {};
@@ -75,14 +78,18 @@ define('yaga-map', ['yaga-ui', 'jquery', 'leaflet'], function (UI, $, L) {
 
         UI.init.call(this, opts);
 
-        this.leaflet = L.map(this.domRoot, opts.leaflet);
-        this.leaflet.yagaElement = this;
-
-        this.leaflet.setView(opts.center, opts.zoomLevel);
+        leafletElement = L.map(this.domRoot, opts.leaflet);
+        this.getLeafletElement = function () {
+            return leafletElement;
+        };
+        leafletElement.getYagaElement = function () {
+            return self;
+        };
+        leafletElement.setView(opts.center, opts.zoomLevel);
         this.domRoot.setAttribute('style', opts.style); // overwrite leaflet inline-css
 
         $(window.document).on('DOMNodeInserted', this.domRoot, function (event) {
-            self.leaflet.invalidateSize();
+            leafletElement.invalidateSize();
         });
 
         /*this.leaflet.on('focus', function () {
@@ -106,12 +113,16 @@ define('yaga-map', ['yaga-ui', 'jquery', 'leaflet'], function (UI, $, L) {
         domRoot = leafletMap.getContainer();
 
         obj = Map.create();
-        obj.leaflet = leafletMap;
-        obj.leaflet.yagaElement = obj;
+        obj.getLeafletElement = function () {
+            return leafletMap;
+        };
+        leafletMap.getYagaElement = function () {
+            return obj;
+        };
         UI.init.call(this, {domRoot: domRoot});
 
         $(window.document).on('DOMNodeInserted', domRoot, function () {
-            obj.leaflet.invalidateSize();
+            leafletMap.invalidateSize();
         });
         return obj;
     };

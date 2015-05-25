@@ -66,9 +66,14 @@ define('yaga-ui-page', ['yaga-ui', 'jquery', 'yaga-ui-header-bar', 'yaga-ui-foot
                 self.domRoot.appendChild(self.footer.domRoot);
             }
         });
+        $(window.document).on('DOMNodeInserted', this.header.domRoot, function () {
+            if (self.header.domRoot.parentNode !== self.domRoot) {
+                self.domRoot.appendChild(self.header.domRoot);
+            }
+        });
     };
     Page.getActivePage = function () {
-        return $.mobile.activePage.get()[0].yagaElement;
+        return $.mobile.activePage.get()[0].getYagaElement();
     };
     Page.create = function (opts) {
         return new Page(opts);

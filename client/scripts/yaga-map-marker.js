@@ -27,7 +27,7 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
             this.emit('show');
             map = map || Map.activeMap;
             if (map) {
-                this.leaflet.addTo(map.leaflet);
+                this.getLeafletElement().addTo(map.getLeafletElement());
                 this.emit('changed');
             } else {
                 window.console.error('No map to show marker!');
@@ -44,7 +44,7 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
             this.emit('hide');
             map = map || Map.activeMap;
             if (map) {
-                map.leaflet.removeLayer(this.leaflet);
+                map.getLeafletElement().removeLayer(this.getLeafletElement());
                 this.emit('changed');
             } else {
                 window.console.error('No map to hide marker from!');
@@ -73,12 +73,12 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         },
         setLatLng: function (value) {
             this.emit('setLatLng', value);
-            this.leaflet.setLatLng(value);
+            this.getLeafletElement().setLatLng(value);
             this.emit('changed');
             return this;
         },
         getLatLng: function () {
-            return this.leaflet.getLatLng();
+            return this.getLeafletElement().getLatLng();
         },
         setIcon: function (value) {
             this.emit('setIcon', value);
@@ -86,7 +86,7 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
                 value = Icon.create(value);
             }
             this.icon = value;
-            this.leaflet.setIcon(value.leaflet);
+            this.getLeafletElement().setIcon(value.getLeafletElement());
             this.emit('changed');
             return this;
         },
@@ -95,17 +95,19 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         },
         bindPopup: function (popup) {
             this.emit('bindPopup', popup);
-            this.leaflet.bindPopup(popup.leaflet);
+            this.getLeafletElement().bindPopup(popup.getLeafletElement());
             return this;
         },
         bindPanel: function (panel) {
             this.emit('bindPanel', panel);
-            this.leaflet.on('click', function () {
+            this.getLeafletElement().on('click', function () {
                 panel.open();
             });
             return this;
         },
-        leaflet: null,
+        getLeafletElement: function () {
+            throw new Error('not implemented');
+        },
         icon: null,
         initialize: function (opts) {
             MapMarker.init.call(this, opts);
@@ -117,6 +119,8 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
      * @static
      */
     MapMarker.init = function (opts) {
+        var leafletElement, self;
+        self = this;
         opts = opts || {};
 
         opts.lat = opts.lat || 0;
@@ -127,11 +131,17 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         } else {
             this.icon = Icon.create(opts.icon);
         }
-        opts.icon = this.icon.leaflet;
+        opts.icon = this.icon.getLeafletElement();
 
         Yaga.init.call(this, opts);
 
-        this.leaflet = L.marker([opts.lat, opts.lng], opts);
+        leafletElement = L.marker([opts.lat, opts.lng], opts);
+        this.getLeafletElement = function () {
+            return leafletElement;
+        };
+        leafletElement.getYagaElement = function () {
+            return self;
+        };
         //this.leaflet.setIcon()
     };
     /**
@@ -144,7 +154,9 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
     MapMarker.assume = function (leafletMarker) {
         var obj;
         obj = MapMarker.create();
-        obj.leaflet = leafletMarker;
+        obj.getLeafletElement = function () {
+            return leafletMarker;
+        };
         return obj;
     };
     /**
