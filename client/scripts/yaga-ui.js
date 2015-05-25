@@ -1,48 +1,60 @@
 /*jslint browser: true*/
 /*globals window, define, Class */
 
-/**
- * @module yaga-ui
- */
 define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
     'use strict';
-    var UI;
+    var YagaUI;
     /**
      * Basic UI super class for yaga
-     *
-     * @alias yaga-ui
-     * @name UI
+     * @alias module:yaga-ui
+     * @name YagaUI
      * @constructor
      * @augments Yaga
-     * @type {Class}
+     * @param {{}} [opts] - Object for configuration
      */
-    UI = new Class({
+    YagaUI = new Class({
         Extends: Yaga,
         initialize: function (opts) {
-            UI.init.call(this, opts);
+            YagaUI.init.call(this, opts);
+            /**
+             * Event that fires everytime something changed on this element
+             * @event changed
+             * @memberOf YagaUI#
+             */
         },
         /**
-         * Set id of ui-element
-         * @param {String} value
-         * @returns {UI}
+         * Set id of dom-element
+         * @memberOf YagaUI#
+         * @method setId
+         * @param {String} value - New id to set on dom element
+         * @fires YagaUI#setId
+         * @fires YagaUI#changed
+         * @returns {self}
          */
         setId: function setIdOfUIElement(value) {
-            this.emit('setTitle', value);
+            /**
+             * Event fires after setting id to new value
+             * @event YagaUI#setId
+             */
+            this.emit('setId', value);
             this.domRoot.setAttribute('id', value);
             this.emit('changed');
             return this;
         },
         /**
          * Get id of ui-element
+         * @memberOf YagaUI#
+         * @method getId
          * @returns {string}
          */
         getId: function getIdOfUIElement() {
             return this.domRoot.getAttribute('id');
         },
         /**
-         * Set class
-         * @param {String} value
-         * @returns {UI}
+         * Set class attribute of dom element
+         * @param {String} value - New class attribute value
+         * @memberOf YagaUI#
+         * @returns {self}
          */
         setClass: function setClassOfUIElement(value) {
             this.emit('setClass', value);
@@ -52,6 +64,7 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Get complete class string of ui-element
+         * @memberOf YagaUI#
          * @returns {string}
          */
         getClass: function setClassOfUIElement() {
@@ -59,6 +72,7 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Proofs for class on ui-element
+         * @memberOf YagaUI#
          * @param value
          * @returns {bool}
          */
@@ -67,8 +81,9 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Add a class on ui-element
+         * @memberOf YagaUI#
          * @param {string} value
-         * @returns {UI}
+         * @returns {self}
          */
         addClass: function addClassOnUIElement(value) {
             this.emit('addClass', value);
@@ -78,8 +93,9 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Removes a class from ui-element
+         * @memberOf YagaUI#
          * @param value
-         * @returns {UI}
+         * @returns {self}
          */
         removeClass: function removeClassOnUIElement(value) {
             this.emit('removeClass', value);
@@ -89,8 +105,9 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Set content of ui-element
+         * @memberOf YagaUI#
          * @param {Node|childNodes|NodeList|String} elem
-         * @returns {UI}
+         * @returns {self}
          */
         setContent: function setContentOfUIElement(elem) {
             this.emit('setContent', elem);
@@ -100,6 +117,7 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
             return this;
         },
         /**
+         * @memberOf YagaUI#
          * Returns the content of the ui-element
          * @returns {childNodes|*|NodeList}
          */
@@ -108,8 +126,9 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Append content to the ui-element dom-root
+         * @memberOf YagaUI#
          * @param {Node|childNodes|NodeList|String} elem
-         * @returns {UI}
+         * @returns {self}
          */
         appendContent: function appendContentOfUIElement(elem) {
             this.emit('appendContent', elem);
@@ -119,8 +138,9 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * Prepend content to the ui-element dom-root
+         * @memberOf YagaUI#
          * @param {Node|childNodes|NodeList|String} elem
-         * @returns {UI}
+         * @returns {self}
          */
         prependContent: function prependContentOfUIElement(elem) {
             this.emit('prependContent', elem);
@@ -130,21 +150,24 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
         },
         /**
          * DOM-Element of ui-element
-         * @tyoe {Node}
+         * @memberOf YagaUI#
+         * @type {Node}
          */
         domRoot: null,
         /**
          * JQueryized version of domRoot
-         * @type {{}}
+         * @memberOf YagaUI#
+         * @type {jQuery}
          */
         $domRoot: null
     });
 
     /**
-     * Constructor to initialize any UI object
+     * Constructor to initialize any YagaUI object
      * @static
+     * @memberOf YagaUI
      */
-    UI.init = function (opts) {
+    YagaUI.init = function (opts) {
         Yaga.init.call(this, opts);
         opts = opts || {};
         opts.domRoot = opts.domRoot || window.document.createElement(opts.domRootTagName || 'div');
@@ -164,23 +187,33 @@ define('yaga-ui', ['yaga', 'jquery'], function (Yaga, $) {
     };
 
     /**
-     * Assume an object and make a Yaga-Object from it
-     * @param {Node} domRoot
+     * Assume a dom element to a yaga-ui element
+     * @param {Node} domRoot - DOM element to assume
      * @static
-     * @returns {UI}
+     * @memberOf YagaUI
+     * @returns {YagaUI}
      */
-    UI.assume = function (domRoot) {
-        return UI.create({domRoot: domRoot});
+    YagaUI.assume = function (domRoot) {
+        return YagaUI.create({domRoot: domRoot});
     };
     /**
-     * Instantiate UI object by function
+     * Instantiate YagaUI object by function
      * @static
-     * @param opts
-     * @returns {UI}
+     * @memberOf YagaUI
+     * @param {{}} opts - Configuration object
+     * @config domRoot - Root element to use for ui-element
+     * @returns {YagaUI}
      */
-    UI.create = function (opts) {
-        return new UI(opts);
+    YagaUI.create = function (opts) {
+        return new YagaUI(opts);
     };
 
-    return UI;
+    return YagaUI;
 });
+
+/**
+ * This is a module for basic user interface elements in yaga applications.
+ * Condition for a yaga-ui element is a DOM element.
+ * @module yaga-ui
+ * @returns YagaUI
+ */
