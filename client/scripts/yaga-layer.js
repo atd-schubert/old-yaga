@@ -1,35 +1,34 @@
 /*jslint browser: true*/
 /*globals window, define, Class*/
 
-/**
- * @module yaga-layer
- */
 define('yaga-layer', ['yaga', 'yaga-map'], function (Yaga, Map) {
     'use strict';
     var Layer;
 
     /**
-     * @name Layer
+     * @name YagaLayer
      * @augments Yaga
-     * @alias yaga-layer
+     * @alias module:yaga-layer
      * @type {Class}
      */
-    Layer = new Class({
+    YagaLayer = new Class({
         Extends: Yaga,
         initialize: function (opts) {
-            Layer.init.call(this, opts);
+            YagaLayer.init.call(this, opts);
         },
         /**
          * Get attribution of a layer
-         * returns {string}
+         * @methodOf YagaLayer#
+         * @returns {string}
          */
         getAttribution: function () {
             throw new Error('not implemented');
         },
         /**
          * Set attribution of a layer
+         * @methodOf YagaLayer#
          * @param {string} value
-         * @returns {Layer}
+         * @returns {YagaLayer}
          */
         setAttribution: function (value) {
             throw new Error('not implemented');
@@ -84,12 +83,12 @@ define('yaga-layer', ['yaga', 'yaga-map'], function (Yaga, Map) {
             if (!map) {
                 throw new Error('No map to hide layer from');
             }
-            map.leaflet.removeLayer(this.leaflet);
+            map.leaflet.removeYagaLayer(this.leaflet);
         },
         leaflet: null
     });
 
-    Layer.init = function YagaLayer(opts) {
+    YagaLayer.init = function YagaLayer(opts) {
         var title, caption;
         opts = opts || {};
 
@@ -120,20 +119,24 @@ define('yaga-layer', ['yaga', 'yaga-map'], function (Yaga, Map) {
             this.setTitle(opts.title);
         }
     };
-    Layer.assume = function () {
+    YagaLayer.assume = function () {
         throw new Error('not implemented');
     };
-    Layer.types = {};
-    Layer.registerType = function (name, layerType) {
-        Layer.types[name] = layerType;
+    YagaLayer.types = {};
+    YagaLayer.registerType = function (name, layerType) {
+        YagaLayer.types[name] = layerType;
     };
-    Layer.create = function (opts) {
+    YagaLayer.create = function (opts) {
         opts = opts || {};
-        if (opts.type && Layer.types[opts.type]) {
-            return Layer.types[opts.type].create(opts);
+        if (opts.type && YagaLayer.types[opts.type]) {
+            return YagaLayer.types[opts.type].create(opts);
         }
-        return new Layer(opts);
+        return new YagaLayer(opts);
     };
 
-    return Layer;
+    return YagaLayer;
 });
+/**
+ * @module yaga-layer
+ * @returns {YagaLayer}
+ */

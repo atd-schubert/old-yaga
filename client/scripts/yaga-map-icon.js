@@ -24,7 +24,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getClassName: function getIconClassName() {
-            return this.leaflet.className;
+            return this.leaflet.options.className;
         },
         /**
          * Set anchor
@@ -42,7 +42,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.iconAnchor|*|o.Icon.Default.options.iconAnchor|number[]}
          */
         getAnchor: function getIconAnchor() {
-            return this.leaflet.iconAnchor;
+            return this.leaflet.options.iconAnchor;
         },
         /**
          * Set retina URL
@@ -60,7 +60,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getRetinaUrl: function getIconRetinaUrl() {
-            return this.leaflet.iconRetinaUrl;
+            return this.leaflet.options.iconRetinaUrl;
         },
         /**
          * Set display size of icon
@@ -78,7 +78,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.iconSize|*|L.DivIcon.options.iconSize|o.DivIcon.options.iconSize|o.Icon.Default.options.iconSize}
          */
         getSize: function getIconSize() {
-            return this.leaflet.iconSize;
+            return this.leaflet.options.iconSize;
         },
         /**
          * Set URL of icon
@@ -96,7 +96,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string|*}
          */
         getUrl: function getIconUrl() {
-            return this.leaflet.iconUrl;
+            return this.leaflet.options.iconUrl;
         },
         /**
          * Set anchor position for popups
@@ -114,7 +114,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.popupAnchor|*|o.Icon.Default.options.popupAnchor}
          */
         getPopupAnchor: function getIconPopupAnchor() {
-            return this.leaflet.popupAnchor;
+            return this.leaflet.options.popupAnchor;
         },
         /**
          * Set anchor position of the shadow
@@ -132,7 +132,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.iconAnchor|*|o.Icon.Default.options.iconAnchor|number[]}
          */
         getShadowAnchor: function getIconShadowAnchor() {
-            return this.leaflet.shadowAnchor;
+            return this.leaflet.options.shadowAnchor;
         },
         /**
          * Set shadow URL for retina devices
@@ -150,7 +150,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getShadowRetinaUrl: function getIconShadowRetinaUrl() {
-            return this.leaflet.shadowRetinaUrl;
+            return this.leaflet.options.shadowRetinaUrl;
         },
         /**
          * Set size of shadow
@@ -168,7 +168,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {L.Icon.Default.options.shadowSize|*|o.Icon.Default.options.shadowSize}
          */
         getShadowSize: function getIconShadowSize() {
-            return this.leaflet.shadowSize;
+            return this.leaflet.options.shadowSize;
         },
         /**
          * Set shadow URL
@@ -186,7 +186,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getShadowUrl: function getIconShadowUrl() {
-            return this.leaflet.shadowUrl;
+            return this.leaflet.options.shadowUrl;
         },
         initialize: function initializeIcon(opts) {
             MapIcon.init.call(this, opts);
@@ -213,7 +213,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
         this.leaflet.yagaElement = this;
     };
     MapIcon.assume = function (leafletIcon) {
-        if (MapIcon.isPrototypeOf(leafletIcon.yagaElement)) {
+        if (MapIcon.prototype.isPrototypeOf(leafletIcon.yagaElement)) {
             return leafletIcon.yagaElement;
         }
         var obj;

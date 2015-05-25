@@ -82,10 +82,11 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         },
         setIcon: function (value) {
             this.emit('setIcon', value);
-            if (!Icon.isPrototypeOf(value)) {
+            if (!Icon.prototype.isPrototypeOf(value)) {
                 value = Icon.create(value);
             }
-            this.icon = icon;
+            this.icon = value;
+            this.leaflet.setIcon(value.leaflet);
             this.emit('changed');
             return this;
         },
@@ -121,7 +122,7 @@ define('yaga-map-marker', ['yaga', 'leaflet', 'yaga-map', 'yaga-map-icon'], func
         opts.lat = opts.lat || 0;
         opts.lng = opts.lng || 0;
 
-        if (Icon.isPrototypeOf(opts.icon)) {
+        if (Icon.prototype.isPrototypeOf(opts.icon)) {
             this.icon = opts.icon;
         } else {
             this.icon = Icon.create(opts.icon);
