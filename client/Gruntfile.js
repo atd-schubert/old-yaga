@@ -69,7 +69,7 @@ var project = {
     ],
     livereload: 35729,
     port: 3000,
-    localHostname: 'localhost' // '0.0.0.0'
+    hostname: 'localhost' // '0.0.0.0'
 };
 
 /**
@@ -210,7 +210,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
                         css: project.css,
                         livereload: {
                             port: project.livereload,
-                            host: project.localHostname
+                            host: project.hostname
                         },
                         jsSrc: 'scripts/vendor/requirejs/require.js',
                         amdMain: 'scripts/main.js'
@@ -226,7 +226,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
                         css: ['scripts/vendor/mocha/mocha.css'],
                         livereload: {
                             port: project.livereload,
-                            host: project.localHostname
+                            host: project.hostname
                         },
                         jsSrc: 'scripts/vendor/requirejs/require.js',
                         amdMain: 'test/main.js'
@@ -282,7 +282,7 @@ module.exports = function yagaClientTaskRunner(grunt) {
                     timestamp: false,
                     hash: true,
                     master: ['dist/index.html'],
-                    process: function(path) {
+                    process: function (path) {
                         return path.substring('dist/'.length);
                     }
                 },
