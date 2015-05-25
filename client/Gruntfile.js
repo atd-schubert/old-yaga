@@ -398,8 +398,8 @@ module.exports = function yagaClientTaskRunner(grunt) {
     });
 
     grunt.registerTask('dist', ['jade:dist', 'requirejs', 'cssmin', 'uglify:dist', 'manifest:dist', 'connect:dist']);
-    grunt.registerTask('debug', ['jade:debug', 'connect:debug', 'watch']);
-    grunt.registerTask('develop', ['jade:debug', 'connect:debug', 'watch']);
+    grunt.registerTask('debug', ['connect:debug', 'watch']);
+    grunt.registerTask('develop', ['jade:debug', 'debug']);
     grunt.registerTask('test', ['jade:test', 'createTests', 'connect:test', 'watch']);
     grunt.registerTask('init', ['bower']);
 
