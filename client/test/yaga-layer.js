@@ -47,7 +47,7 @@ define('../test/yaga-layer', ['../test/yaga', 'mocha'], function (yagaTest) {
                     return done(new Error('Wrong opacity!'));
                 });
                 it('should get object within leaflet object', function (done) {
-                    if (first.leaflet.yagaElement === first) {
+                    if (first.getLeafletElement().getYagaElement() === first) {
                         return done();
                     }
                     return done(new Error('Yaga-element not linked correctly in leaflet!'));

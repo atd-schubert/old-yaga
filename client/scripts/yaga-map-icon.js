@@ -15,7 +15,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setClassName: function setIconClassName(value) {
             this.emit('setClassName', value);
-            this.getLeafletElement().className = value;
+            this.getLeafletElement().options.className = value;
             this.emit('changed');
             return this;
         },
@@ -24,6 +24,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          * @returns {string}
          */
         getClassName: function getIconClassName() {
+            console.log(this.getLeafletElement().options);
             return this.getLeafletElement().options.className;
         },
         /**
@@ -33,7 +34,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setAnchor: function setIconAnchor(value) {
             this.emit('setAnchor', value);
-            this.getLeafletElement().iconAnchor = value;
+            this.getLeafletElement().options.iconAnchor = value;
             this.emit('changed');
             return this;
         },
@@ -51,7 +52,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setRetinaUrl: function setIconRetinaUrl(value) {
             this.emit('setRetinaUrl', value);
-            this.getLeafletElement().iconRetinaUrl = value;
+            this.getLeafletElement().options.iconRetinaUrl = value;
             this.emit('changed');
             return this;
         },
@@ -69,7 +70,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setSize: function setIconSize(value) {
             this.emit('setSize', value);
-            this.getLeafletElement().iconSize = value;
+            this.getLeafletElement().options.iconSize = value;
             this.emit('changed');
             return this;
         },
@@ -87,7 +88,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setUrl: function setIconUrl(value) {
             this.emit('setUrl', value);
-            this.getLeafletElement().iconUrl = value;
+            this.getLeafletElement().options.iconUrl = value;
             this.emit('changed');
             return this;
         },
@@ -105,7 +106,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setPopupAnchor: function setIconPopupAnchor(value) {
             this.emit('setPopupAnchor', value);
-            this.getLeafletElement().popupAnchor = value;
+            this.getLeafletElement().options.popupAnchor = value;
             this.emit('changed');
             return this;
         },
@@ -123,7 +124,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowAnchor: function getIconPopupAnchor(value) {
             this.emit('setShadowAnchor', value);
-            this.getLeafletElement().shadowAnchor = value;
+            this.getLeafletElement().options.shadowAnchor = value;
             this.emit('changed');
             return this;
         },
@@ -141,7 +142,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowRetinaUrl: function setIconShadowRetinaUrl(value) {
             this.emit('setShadowRetinaUrl', value);
-            this.getLeafletElement().shadowRetinaUrl = value;
+            this.getLeafletElement().options.shadowRetinaUrl = value;
             this.emit('changed');
             return this;
         },
@@ -159,7 +160,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowSize: function getIconShadowRetinaUrl(value) {
             this.emit('setShadowSize', value);
-            this.getLeafletElement().shadowSize = value;
+            this.getLeafletElement().options.shadowSize = value;
             this.emit('changed');
             return this;
         },
@@ -177,7 +178,7 @@ define('yaga-map-icon', ['yaga', 'leaflet'], function (Yaga, L) {
          */
         setShadowUrl: function setIconShadowUrl(value) {
             this.emit('setShadowUrl', value);
-            this.getLeafletElement().shadowUrl = value;
+            this.getLeafletElement().options.shadowUrl = value;
             this.emit('changed');
             return this;
         },

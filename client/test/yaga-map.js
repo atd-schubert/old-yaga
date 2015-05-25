@@ -34,9 +34,11 @@ define('../test/yaga-map', ['../test/yaga-ui', 'yaga-map', 'mocha'], function (u
                 });
                 it('should get layers', function (done) {
                     var testObj = target.create();
-                    testObj.leaflet = {
-                        _layers: {one: {leaflet: {test: 'getLayer test'}}},
-                        invalidateSize: function () {}
+                    testObj.getLeafletElement = function () {
+                        return {
+                            _layers: {one: {getLeafletElement: function () {return {test: 'getLayer test'};}}},
+                            invalidateSize: function () {}
+                        };
                     };
                     if (testObj.getLayers().length === 1 || testObj.getLayers()[0].test === 'getLayer test') {
                         return done();
